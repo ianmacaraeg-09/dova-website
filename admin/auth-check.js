@@ -1,11 +1,11 @@
 /* ============================================================
-   Guards every admin/*.html page. Same caveat as js/admin-gate.js:
-   this is a sessionStorage flag check, not real auth — anyone who
-   opens devtools can set it themselves. Placeholder until real
-   auth exists.
+   Guards every admin/*.html page except login.html. Requires
+   supabase-auth.js to be loaded first on the same page.
+   Real Supabase Auth session check — no longer a sessionStorage
+   placeholder flag.
    ============================================================ */
 (function () {
-  if (sessionStorage.getItem('dova_admin_auth') !== 'true') {
-    window.location.href = '../index.html';
+  if (typeof isLoggedIn !== 'function' || !isLoggedIn()) {
+    window.location.href = 'login.html';
   }
 })();

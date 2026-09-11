@@ -13,7 +13,11 @@
 
 <header class="admin-header">
   <img src="../assets/dova-wordmark.png" alt="DOVA">
-  <a class="back" href="../index.html">&larr; Back to site</a>
+  <div class="admin-header-right">
+    <span class="admin-user-email" id="userEmail"></span>
+    <button class="admin-signout" id="signOutBtn">Sign out</button>
+    <a class="back" href="../index.html">&larr; Back to site</a>
+  </div>
 </header>
 
 <main class="admin-main">
@@ -24,36 +28,85 @@
     <a class="agent-tile" href="eos.html">
       <span class="agent-tile-name">Eos</span>
       <span class="agent-tile-role">Owner&rsquo;s Daily Brief</span>
+      <span class="agent-tile-stat" data-stat="eos">Loading&hellip;</span>
       <span class="agent-tile-status live">Live</span>
     </a>
     <a class="agent-tile" href="echo.html">
       <span class="agent-tile-name">Echo</span>
       <span class="agent-tile-role">24/7 Helpdesk</span>
+      <span class="agent-tile-stat" data-stat="echo">Loading&hellip;</span>
       <span class="agent-tile-status">Coming soon</span>
     </a>
     <a class="agent-tile" href="hora.html">
       <span class="agent-tile-name">Hora</span>
       <span class="agent-tile-role">Bookings &amp; Scheduling</span>
+      <span class="agent-tile-stat" data-stat="hora">Loading&hellip;</span>
       <span class="agent-tile-status">Coming soon</span>
     </a>
     <a class="agent-tile" href="argo.html">
       <span class="agent-tile-name">Argo</span>
       <span class="agent-tile-role">Smart Inventory &amp; Supplier Outreach</span>
+      <span class="agent-tile-stat" data-stat="argo">Loading&hellip;</span>
       <span class="agent-tile-status">Coming soon</span>
     </a>
     <a class="agent-tile" href="obol.html">
       <span class="agent-tile-name">Obol</span>
       <span class="agent-tile-role">Payments &amp; Collections</span>
+      <span class="agent-tile-stat" data-stat="obol">Loading&hellip;</span>
       <span class="agent-tile-status">Coming soon</span>
     </a>
     <a class="agent-tile" href="charis.html">
       <span class="agent-tile-name">Charis</span>
       <span class="agent-tile-role">Follow-up &amp; Reviews</span>
+      <span class="agent-tile-stat" data-stat="charis">Loading&hellip;</span>
       <span class="agent-tile-status">Coming soon</span>
     </a>
   </div>
 </main>
 
+<script src="supabase-auth.js"></script>
 <script src="auth-check.js"></script>
+<script>
+  document.getElementById('userEmail').textContent = getUserEmail() || '';
+  document.getElementById('signOutBtn').addEventListener('click', function () {
+    signOut().then(function () { location.href = 'login.html'; });
+  });
+
+  function setStat(key, html) {
+    var el = document.querySelector('[data-stat="' + key + '"]');
+    if (el) el.innerHTML = html;
+  }
+  function statError(key) { setStat(key, '<span style="color:var(--grey-500)">Could not load</span>'); }
+
+  fetchTable('tasks', 'select=status,due_date').then(function (rows) {
+    var today = new Date().toISOString().slice(0, 10);
+    var closed = ['done', 'completed', 'cancelled'];
+    var open = rows.filter(function (r) { return closed.indexOf(r.status) === -1; });
+    var overdue = open.filter(function (r) { return r.due_date && r.due_date < today; });
+    setStat('eos', '<span class="n">' + open.length + '</span> open task' + (open.length === 1 ? '' : 's') +
+      (overdue.length ? ', <span class="n">' + overdue.length + '</span> overdue' : ''));
+  }).catch(function () { statError('eos'); });
+
+  fetchTable('enquiries', 'select=status&status=eq.open').then(function (rows) {
+    setStat('echo', '<span class="n">' + rows.length + '</span> open enquir' + (rows.length === 1 ? 'y' : 'ies'));
+  }).catch(function () { statError('echo'); });
+
+  fetchTable('bookings', 'select=status&status=eq.pending').then(function (rows) {
+    setStat('hora', '<span class="n">' + rows.length + '</span> pending booking' + (rows.length === 1 ? '' : 's'));
+  }).catch(function () { statError('hora'); });
+
+  fetchTable('inventory_items', 'select=quantity_on_hand,reorder_point').then(function (rows) {
+    var low = rows.filter(function (r) { return Number(r.quantity_on_hand) <= Number(r.reorder_point); });
+    setStat('argo', '<span class="n">' + low.length + '</span> item' + (low.length === 1 ? '' : 's') + ' low on stock');
+  }).catch(function () { statError('argo'); });
+
+  fetchTable('invoices', 'select=status&status=eq.overdue').then(function (rows) {
+    setStat('obol', '<span class="n">' + rows.length + '</span> overdue invoice' + (rows.length === 1 ? '' : 's'));
+  }).catch(function () { statError('obol'); });
+
+  fetchTable('leads', 'select=stage&stage=in.(new,contacted)').then(function (rows) {
+    setStat('charis', '<span class="n">' + rows.length + '</span> active lead' + (rows.length === 1 ? '' : 's'));
+  }).catch(function () { statError('charis'); });
+</script>
 </body>
 </html>

@@ -13,18 +13,54 @@
 
 <header class="admin-header">
   <img src="../assets/dova-wordmark.png" alt="DOVA">
-  <a class="back" href="dashboard.html">&larr; All agents</a>
+  <div class="admin-header-right">
+    <span class="admin-user-email" id="userEmail"></span>
+    <button class="admin-signout" id="signOutBtn">Sign out</button>
+    <a class="back" href="dashboard.html">&larr; All agents</a>
+  </div>
 </header>
 
 <main>
   <div class="agent-page-header">
     <h1 class="agent-page-name">Echo</h1>
     <span class="agent-page-role">24/7 Helpdesk</span>
-    <p class="agent-page-note">Answers every enquiry that lands — web, Messenger, SMS — in your voice and your prices. No backend built yet, so the chat below is a placeholder.</p>
+    <p class="agent-page-note">Answers every enquiry that lands — web, Messenger, SMS — in your voice and your prices. No backend built yet, so the chat below is a placeholder; the enquiries themselves are real sandbox data.</p>
+  </div>
+
+  <div class="data-section">
+    <div class="data-section-head">
+      <h2>Enquiries</h2>
+      <span class="count" id="rowsCount"></span>
+    </div>
+    <div class="data-table-wrap" id="rowsTable"></div>
   </div>
 </main>
 
+<script src="supabase-auth.js"></script>
 <script src="auth-check.js"></script>
+<script src="render-table.js"></script>
+<script>
+  document.getElementById('userEmail').textContent = getUserEmail() || '';
+  document.getElementById('signOutBtn').addEventListener('click', function () {
+    signOut().then(function () { location.href = 'login.html'; });
+  });
+
+  fetchTable('enquiries', 'select=*&order=created_at.desc').then(function (rows) {
+    document.getElementById('rowsCount').textContent = rows.length + ' total';
+    renderTable('rowsTable', rows, [
+      { label: 'From', key: 'customer_name' },
+      { label: 'Channel', render: function (r) { return pill(r.channel); } },
+      { label: 'Message', key: 'message' },
+      { label: 'Status', render: function (r) {
+        var tone = r.status === 'escalated' ? 'danger' : (r.status === 'answered' ? 'ok' : 'warn');
+        return pill(r.status, tone);
+      } },
+      { label: 'Received', render: function (r) { return fmtDateTime(r.created_at); } }
+    ]);
+  }).catch(function (err) {
+    document.getElementById('rowsTable').innerHTML = '<div class="data-empty">' + escapeHtml(err.message) + '</div>';
+  });
+</script>
 <script src="widget.js"></script>
 <script>
   initAgentWidget({ agentName: 'Echo', endpoint: '', enabled: false });

@@ -42,6 +42,35 @@ button,input{ font-family:var(--font-body); color:inherit; }
 .admin-header img{ height:20px; display:block; }
 .admin-header .back{ font-size:13px; color:var(--grey-300); }
 .admin-header .back:hover{ color:var(--white); }
+.admin-header-right{ display:flex; align-items:center; gap:20px; }
+.admin-user-email{ font-size:12px; color:var(--grey-500); }
+.admin-signout{ background:none; border:1px solid var(--line-strong); border-radius:var(--radius-btn); color:var(--grey-300); font-size:12px; padding:7px 14px; cursor:pointer; transition:border-color .2s, color .2s; }
+.admin-signout:hover{ border-color:var(--white); color:var(--white); }
+
+/* ---------- login page ---------- */
+.login-wrap{
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:20px; text-align:center;
+}
+.login-logo{ height:22px; margin-bottom:36px; }
+.login-title{ font-size:clamp(1.6rem,3vw,2.1rem); margin-bottom:10px; }
+.login-sub{ color:var(--grey-300); font-size:.92rem; margin-bottom:40px; max-width:340px; line-height:1.6; }
+.login-form{ width:100%; max-width:320px; display:flex; flex-direction:column; gap:22px; }
+.login-field{ text-align:left; display:flex; flex-direction:column; gap:8px; }
+.login-field label{ font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; color:var(--grey-500); }
+.login-field input{
+  background:transparent; border:1px solid var(--line-strong); border-radius:12px;
+  padding:12px 14px; color:var(--white); font-size:1rem; outline:none; transition:border-color .2s;
+}
+.login-field input:focus{ border-color:var(--white); }
+.btn-login{
+  background:var(--white); color:var(--black); border:none; border-radius:var(--radius-btn);
+  padding:14px; font-family:var(--font-display); font-weight:600; font-size:.95rem; cursor:pointer;
+  transition:opacity .2s;
+}
+.btn-login:hover{ opacity:.85; }
+.btn-login:disabled{ opacity:.5; cursor:not-allowed; }
+.login-error{ color:#e0776b; font-size:.85rem; text-align:left; }
 
 /* ---------- dashboard ---------- */
 .admin-main{ padding:clamp(48px,7vw,84px) clamp(20px,4vw,56px); max-width:1080px; margin:0 auto; }
@@ -56,10 +85,33 @@ button,input{ font-family:var(--font-body); color:inherit; }
 }
 .agent-tile:hover{ border-color:var(--line-strong); transform:translateY(-4px); }
 .agent-tile-name{ font-family:var(--font-display); font-weight:700; font-size:1.7rem; }
-.agent-tile-role{ font-size:.76rem; text-transform:uppercase; letter-spacing:.08em; color:var(--grey-500); margin:6px 0 16px; }
+.agent-tile-role{ font-size:.76rem; text-transform:uppercase; letter-spacing:.08em; color:var(--grey-500); margin:6px 0 10px; }
+.agent-tile-stat{ font-size:.85rem; color:var(--grey-100); margin-bottom:14px; min-height:1.2em; }
+.agent-tile-stat .n{ font-family:var(--font-display); font-weight:700; color:var(--white); }
 .agent-tile-status{ display:inline-flex; align-items:center; gap:7px; font-size:.75rem; color:var(--grey-300); }
 .agent-tile-status::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--grey-500); flex-shrink:0; }
 .agent-tile-status.live::before{ background:#4ade80; }
+
+/* ---------- data tables on each agent page ---------- */
+.data-section{ max-width:920px; margin:0 auto; padding:0 clamp(20px,4vw,56px) 100px; }
+.data-section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:20px; gap:16px; flex-wrap:wrap; }
+.data-section-head h2{ font-size:1.3rem; }
+.data-section-head .count{ font-size:.8rem; color:var(--grey-500); }
+.data-table-wrap{ border:1px solid var(--line); border-radius:var(--radius-soft); overflow:hidden; }
+.data-table{ width:100%; border-collapse:collapse; font-size:.88rem; }
+.data-table th{
+  text-align:left; font-family:var(--font-display); font-weight:600; font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--grey-500); padding:14px 18px; background:var(--panel-2); border-bottom:1px solid var(--line);
+}
+.data-table td{ padding:13px 18px; border-bottom:1px solid var(--line); color:var(--grey-100); vertical-align:top; }
+.data-table tr:last-child td{ border-bottom:none; }
+.data-table tr:hover td{ background:rgba(255,255,255,0.02); }
+.data-empty{ padding:32px 18px; text-align:center; color:var(--grey-500); font-size:.88rem; }
+
+.pill{ display:inline-block; font-size:.72rem; padding:4px 10px; border-radius:20px; border:1px solid var(--line-strong); color:var(--grey-300); white-space:nowrap; }
+.pill-ok{ color:#4ade80; border-color:rgba(74,222,128,.35); }
+.pill-warn{ color:#e0b34d; border-color:rgba(224,179,77,.4); }
+.pill-danger{ color:#e0776b; border-color:rgba(224,119,107,.4); }
 
 /* ---------- individual agent page ---------- */
 .agent-page-header{ text-align:center; padding:min(14vh,110px) 20px 40px; }

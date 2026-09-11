@@ -13,7 +13,11 @@
 
 <header class="admin-header">
   <img src="../assets/dova-wordmark.png" alt="DOVA">
-  <a class="back" href="dashboard.html">&larr; All agents</a>
+  <div class="admin-header-right">
+    <span class="admin-user-email" id="userEmail"></span>
+    <button class="admin-signout" id="signOutBtn">Sign out</button>
+    <a class="back" href="dashboard.html">&larr; All agents</a>
+  </div>
 </header>
 
 <main>
@@ -22,9 +26,70 @@
     <span class="agent-page-role">Owner&rsquo;s Daily Brief</span>
     <p class="agent-page-note">Reads yesterday across every module and writes the short version: what sold, what slipped, what needs you today. Ask it anything from the chat in the corner.</p>
   </div>
+
+  <div class="data-section">
+    <div class="data-section-head">
+      <h2>Tasks</h2>
+      <span class="count" id="tasksCount"></span>
+    </div>
+    <div class="data-table-wrap" id="tasksTable"></div>
+  </div>
+
+  <div class="data-section">
+    <div class="data-section-head">
+      <h2>End-of-day reports</h2>
+      <span class="count" id="reportsCount"></span>
+    </div>
+    <div class="data-table-wrap" id="reportsTable"></div>
+  </div>
 </main>
 
+<script src="supabase-auth.js"></script>
 <script src="auth-check.js"></script>
+<script src="render-table.js"></script>
+<script>
+  document.getElementById('userEmail').textContent = getUserEmail() || '';
+  document.getElementById('signOutBtn').addEventListener('click', function () {
+    signOut().then(function () { location.href = 'login.html'; });
+  });
+
+  var today = new Date().toISOString().slice(0, 10);
+
+  fetchTable('tasks', 'select=*&order=due_date.asc.nullslast').then(function (rows) {
+    document.getElementById('tasksCount').textContent = rows.length + ' total';
+    renderTable('tasksTable', rows, [
+      { label: 'Title', key: 'title' },
+      { label: 'Assignee', key: 'assignee' },
+      { label: 'Due', render: function (r) {
+        var overdue = r.due_date && r.due_date < today && ['done', 'completed', 'cancelled'].indexOf(r.status) === -1;
+        return fmtDate(r.due_date) + (overdue ? ' ' + pill('Overdue', 'danger') : '');
+      } },
+      { label: 'Status', render: function (r) {
+        var tone = r.status === 'done' ? 'ok' : null;
+        return pill(r.status, tone);
+      } }
+    ]);
+  }).catch(function (err) {
+    document.getElementById('tasksTable').innerHTML = '<div class="data-empty">' + escapeHtml(err.message) + '</div>';
+  });
+
+  fetchTable('eod_reports', 'select=*&order=report_date.desc').then(function (rows) {
+    document.getElementById('reportsCount').textContent = rows.length + ' total';
+    renderTable('reportsTable', rows, [
+      { label: 'Date', render: function (r) { return fmtDate(r.report_date); } },
+      { label: 'Staff', key: 'staff_id' },
+      { label: 'Tomorrow', key: 'tomorrow_plan' },
+      { label: 'Blockers', key: 'blockers' },
+      { label: 'Needs help', render: function (r) {
+        if (r.needs_help === true) return pill('Yes', 'danger');
+        if (r.needs_help === false) return pill('No', 'ok');
+        return pill('Unknown', 'warn');
+      } }
+    ]);
+  }).catch(function (err) {
+    document.getElementById('reportsTable').innerHTML = '<div class="data-empty">' + escapeHtml(err.message) + '</div>';
+  });
+</script>
 <script src="widget.js"></script>
 <script>
   initAgentWidget({
