@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eos — DOVA Admin</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <img src="../assets/dova-wordmark.png" alt="DOVA">
+  <a class="back" href="dashboard.html">&larr; All agents</a>
+</header>
+
+<main>
+  <div class="agent-page-header">
+    <h1 class="agent-page-name">Eos</h1>
+    <span class="agent-page-role">Owner&rsquo;s Daily Brief</span>
+    <p class="agent-page-note">Reads yesterday across every module and writes the short version: what sold, what slipped, what needs you today. Ask it anything from the chat in the corner.</p>
+  </div>
+</main>
+
+<script src="auth-check.js"></script>
+<script src="widget.js"></script>
+<script>
+  initAgentWidget({
+    agentName: 'Eos',
+    endpoint: 'http://127.0.0.1:8787/chat',
+    enabled: true
+  });
+</script>
+</body>
+</html>

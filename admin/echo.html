@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echo — DOVA Admin</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <img src="../assets/dova-wordmark.png" alt="DOVA">
+  <a class="back" href="dashboard.html">&larr; All agents</a>
+</header>
+
+<main>
+  <div class="agent-page-header">
+    <h1 class="agent-page-name">Echo</h1>
+    <span class="agent-page-role">24/7 Helpdesk</span>
+    <p class="agent-page-note">Answers every enquiry that lands — web, Messenger, SMS — in your voice and your prices. No backend built yet, so the chat below is a placeholder.</p>
+  </div>
+</main>
+
+<script src="auth-check.js"></script>
+<script src="widget.js"></script>
+<script>
+  initAgentWidget({ agentName: 'Echo', endpoint: '', enabled: false });
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argo — DOVA Admin</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <img src="../assets/dova-wordmark.png" alt="DOVA">
+  <a class="back" href="dashboard.html">&larr; All agents</a>
+</header>
+
+<main>
+  <div class="agent-page-header">
+    <h1 class="agent-page-name">Argo</h1>
+    <span class="agent-page-role">Smart Inventory &amp; Supplier Outreach</span>
+    <p class="agent-page-note">Watches every count against its reorder point, drafts purchase orders, compares supplier prices. No backend built yet, so the chat below is a placeholder.</p>
+  </div>
+</main>
+
+<script src="auth-check.js"></script>
+<script src="widget.js"></script>
+<script>
+  initAgentWidget({ agentName: 'Argo', endpoint: '', enabled: false });
+</script>
+</body>
+</html>

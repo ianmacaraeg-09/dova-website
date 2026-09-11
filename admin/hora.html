@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hora — DOVA Admin</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <img src="../assets/dova-wordmark.png" alt="DOVA">
+  <a class="back" href="dashboard.html">&larr; All agents</a>
+</header>
+
+<main>
+  <div class="agent-page-header">
+    <h1 class="agent-page-name">Hora</h1>
+    <span class="agent-page-role">Bookings &amp; Scheduling</span>
+    <p class="agent-page-note">Holds the calendar, confirms and reschedules, chases deposits. No backend built yet, so the chat below is a placeholder.</p>
+  </div>
+</main>
+
+<script src="auth-check.js"></script>
+<script src="widget.js"></script>
+<script>
+  initAgentWidget({ agentName: 'Hora', endpoint: '', enabled: false });
+</script>
+</body>
+</html>
