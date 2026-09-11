@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eos — Owner Admin (Sandbox)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:        #030303;
+    --bg:           #060606;
+    --panel:        #101010;
+    --panel-2:      #161616;
+    --white:        #f6f5f2;
+    --grey-100:     #d6d4cf;
+    --grey-300:     #a3a19c;
+    --grey-500:     #6b6a66;
+    --line:         rgba(246,245,242,0.12);
+    --line-strong:  rgba(246,245,242,0.24);
+    --accent:       #f6f5f2;
+    --radius-soft:  20px;
+    --radius-btn:   999px;
+    --font-display: 'Clash Display', 'Arial Narrow', sans-serif;
+    --font-body:    'General Sans', 'Helvetica Neue', Arial, sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0; background:var(--bg); color:var(--white);
+    font-family:var(--font-body); font-size:15px; line-height:1.55;
+    display:flex; flex-direction:column;
+  }
+  a{ color:inherit; }
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(16px,4vw,40px);
+    border-bottom:1px solid var(--line);
+    background:rgba(6,6,6,0.9);
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand img{ height:20px; width:auto; display:block; opacity:.92; }
+  .brand-label{ font-family:var(--font-display); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand-tag{ color:var(--grey-500); font-size:12px; }
+  .status{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--grey-300); }
+  .status-dot{ width:8px; height:8px; border-radius:50%; background:var(--grey-500); transition:background .3s; }
+  .status-dot.ok{ background:#5fd47a; }
+  .status-dot.err{ background:#e26a5a; }
+
+  main{
+    flex:1; display:flex; flex-direction:column; max-width:760px;
+    width:100%; margin:0 auto; padding:24px clamp(16px,4vw,32px) 0;
+    min-height:0;
+  }
+
+  .intro{
+    color:var(--grey-300); font-size:13px; padding-bottom:16px;
+    border-bottom:1px solid var(--line); margin-bottom:16px;
+  }
+  .intro b{ color:var(--white); }
+
+  .quick-actions{ display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+  .quick-btn{
+    font-family:var(--font-body); font-size:13px; color:var(--white);
+    background:var(--panel-2); border:1px solid var(--line);
+    border-radius:var(--radius-btn); padding:8px 16px; cursor:pointer;
+    transition:border-color .2s, background .2s;
+  }
+  .quick-btn:hover{ border-color:var(--line-strong); background:#1c1c1c; }
+  .quick-btn:disabled{ opacity:.5; cursor:default; }
+
+  .log{
+    flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:14px;
+    padding-bottom:16px; min-height:0;
+  }
+  .msg{ max-width:82%; padding:12px 16px; border-radius:var(--radius-soft); font-size:14px; white-space:pre-wrap; }
+  .msg.user{ align-self:flex-end; background:var(--white); color:var(--black); border-bottom-right-radius:6px; }
+  .msg.eos{ align-self:flex-start; background:var(--panel); border:1px solid var(--line); border-bottom-left-radius:6px; }
+  .msg.system{ align-self:center; color:var(--grey-500); font-size:12px; background:none; padding:4px; }
+  .msg.error{ align-self:flex-start; background:rgba(226,106,90,0.12); border:1px solid rgba(226,106,90,0.4); color:#f2b3a8; }
+  .msg b{ font-weight:600; color:inherit; }
+
+  .composer{
+    display:flex; gap:10px; padding:16px 0 22px; border-top:1px solid var(--line);
+  }
+  .composer input{
+    flex:1; background:var(--panel-2); border:1px solid var(--line); border-radius:var(--radius-btn);
+    padding:12px 18px; color:var(--white); font-size:14px; outline:none;
+  }
+  .composer input:focus{ border-color:var(--line-strong); }
+  .composer button{
+    font-family:var(--font-body); font-weight:500; font-size:14px;
+    background:var(--white); color:var(--black); border:none; border-radius:var(--radius-btn);
+    padding:0 22px; cursor:pointer;
+  }
+  .composer button:disabled{ opacity:.5; cursor:default; }
+
+  .typing{ color:var(--grey-500); font-size:13px; padding:2px 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <img src="assets/dova-wordmark.png" alt="DOVA">
+    <span class="brand-label">Eos</span>
+    <span class="brand-tag">Owner's daily brief · sandbox</span>
+  </div>
+  <div class="status">
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-text">checking backend…</span>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <b>This is an internal, owner-only sandbox</b> — not linked from the public site, not deployed live.
+    Eos reads tasks and recent reports and answers read-only; it has no write access.
+  </div>
+
+  <div class="quick-actions">
+    <button class="quick-btn" id="btn-brief">Get today's brief</button>
+    <button class="quick-btn" id="btn-overdue">Anything overdue?</button>
+    <button class="quick-btn" id="btn-blockers">Any blockers?</button>
+  </div>
+
+  <div class="log" id="log"></div>
+
+  <form class="composer" id="composer">
+    <input type="text" id="input" placeholder="Ask Eos something…" autocomplete="off">
+    <button type="submit" id="send-btn">Send</button>
+  </form>
+</main>
+
+<script>
+(function () {
+  const API_BASE = "http://127.0.0.1:8787";
+  const log = document.getElementById("log");
+  const form = document.getElementById("composer");
+  const input = document.getElementById("input");
+  const sendBtn = document.getElementById("send-btn");
+  const statusDot = document.getElementById("status-dot");
+  const statusText = document.getElementById("status-text");
+
+  let sessionId = null;
+  try { sessionId = sessionStorage.getItem("eos_session_id"); } catch (e) {}
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // Minimal, safe markdown-ish rendering for Eos's replies: escape first,
+  // then only re-introduce **bold** and line breaks - no innerHTML on
+  // anything that wasn't just escaped.
+  function renderEosText(text) {
+    let safe = escapeHtml(text);
+    safe = safe.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+    safe = safe.replace(/\n/g, "<br>");
+    return safe;
+  }
+
+  function addMessage(role, text, isHtml) {
+    const div = document.createElement("div");
+    div.className = "msg " + role;
+    if (isHtml) { div.innerHTML = text; } else { div.textContent = text; }
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+    return div;
+  }
+
+  async function checkHealth() {
+    try {
+      const res = await fetch(API_BASE + "/health");
+      if (!res.ok) throw new Error("bad status");
+      statusDot.className = "status-dot ok";
+      statusText.textContent = "Eos backend connected";
+    } catch (e) {
+      statusDot.className = "status-dot err";
+      statusText.textContent = "Eos backend unreachable — is server.py running?";
+    }
+  }
+
+  async function sendMessage(text) {
+    addMessage("user", text);
+    input.value = "";
+    sendBtn.disabled = true;
+    const typing = addMessage("system", "Eos is thinking…");
+
+    try {
+      const res = await fetch(API_BASE + "/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, session_id: sessionId }),
+      });
+      const data = await res.json();
+      typing.remove();
+
+      if (!res.ok) {
+        addMessage("error", data.error || ("Request failed (" + res.status + ")"));
+        return;
+      }
+
+      sessionId = data.session_id;
+      try { sessionStorage.setItem("eos_session_id", sessionId); } catch (e) {}
+      addMessage("eos", renderEosText(data.reply), true);
+    } catch (e) {
+      typing.remove();
+      addMessage("error", "Couldn't reach the Eos backend at " + API_BASE + " — is server.py running?");
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (text) sendMessage(text);
+  });
+
+  document.getElementById("btn-brief").addEventListener("click", () => sendMessage("Write this morning's brief."));
+  document.getElementById("btn-overdue").addEventListener("click", () => sendMessage("Is anything overdue right now?"));
+  document.getElementById("btn-blockers").addEventListener("click", () => sendMessage("Are there any blockers I should know about?"));
+
+  checkHealth();
+})();
+</script>
+
+</body>
+</html>

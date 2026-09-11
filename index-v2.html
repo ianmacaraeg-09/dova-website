@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DOVA — Built to fit how you work.</title>
+<meta name="description" content="DOVA is a founder-led studio that builds websites, business systems, and named AI agents shaped to how an independent business already runs — not to a template.">
+
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style-v2.css">
+</head>
+<body>
+
+<!-- grain / noise overlay -->
+<svg class="noise-svg" aria-hidden="true">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"></feTurbulence>
+    <feColorMatrix type="saturate" values="0"></feColorMatrix>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"></rect>
+</svg>
+
+<!-- custom cursor -->
+<div class="cursor" id="cursor">
+  <div class="cursor-ring">
+    <span class="cursor-ring-label" id="cursorLabel"></span>
+  </div>
+  <div class="cursor-dot"></div>
+</div>
+
+<!-- cursor spotlight -->
+<div class="spotlight" id="spotlight"></div>
+
+<!-- preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-mark-mask">
+    <img class="preloader-mark" id="preloaderMark" src="assets/dova-mark.png" alt="" aria-hidden="true">
+  </div>
+  <div class="preloader-row">
+    <span class="preloader-label">DOVA</span>
+    <span class="preloader-count"><span id="preloaderPercent">0</span>%</span>
+  </div>
+  <div class="preloader-bar"><span id="preloaderBarFill"></span></div>
+</div>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a href="#hero" class="nav-logo" data-hover aria-label="DOVA home">
+    <img class="mark mark-nav-wordmark" id="navMark" src="assets/dova-wordmark.png" alt="DOVA">
+  </a>
+
+  <nav class="nav-links">
+    <a href="#what" data-hover>What is DOVA</a>
+    <a href="#presets" data-hover>Presets</a>
+    <a href="#agents" data-hover>Agents</a>
+    <a href="#work" data-hover>Work</a>
+    <a href="#pricing" data-hover>Pricing</a>
+  </nav>
+
+  <a href="#contact" class="btn btn-ghost" data-hover>
+    <span class="btn-label">Book a demo</span>
+    <span class="btn-fill"></span>
+  </a>
+
+  <button class="nav-burger" id="navBurger" aria-label="Toggle menu" data-hover>
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#what" data-hover>What is DOVA</a>
+  <a href="#presets" data-hover>Presets</a>
+  <a href="#agents" data-hover>Agents</a>
+  <a href="#process" data-hover>How it runs</a>
+  <a href="#work" data-hover>Work</a>
+  <a href="#pricing" data-hover>Pricing</a>
+  <a href="#faq" data-hover>FAQ</a>
+  <a href="#contact" data-hover>Book a demo</a>
+</div>
+
+<!-- scroll progress rail -->
+<div class="progress-rail" aria-hidden="true"><span id="progressFill"></span></div>
+
+<main class="scene">
+
+  <!-- ============ HERO ============ -->
+  <section class="section hero" id="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-tag reveal-up">Est. 2026 &middot; Enterprise-grade, SME-priced &middot; Angeles City, Pampanga</div>
+
+    <div class="hero-mark-wrap">
+      <div class="hero-mark-orbit-ring r1" aria-hidden="true"></div>
+      <div class="hero-mark-orbit-ring r2" aria-hidden="true"></div>
+      <div class="hero-mark-tilt" id="heroMarkTilt">
+        <img class="mark mark-hero" id="heroMark" src="assets/dova-mark.png" alt="" aria-hidden="true">
+      </div>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner" data-chars>Built to fit</span></span>
+      <span class="line line-flow">
+        <span class="line-inner">how&nbsp;</span>
+        <span class="morph" id="heroMorph">
+          <span class="morph-pill" id="heroMorphPill"><span class="morph-word" id="heroMorphWord">you work.</span></span>
+        </span>
+      </span>
+    </h1>
+
+    <p class="hero-sub reveal-up">
+      No two small businesses run the same way, so we don't sell the same thing
+      twice. We start from presets &mdash; a website, a few proven automations
+      &mdash; and shape a system around your actual process. Agents optional,
+      when you want them.
+    </p>
+
+    <div class="hero-actions reveal-up">
+      <a href="#contact" class="btn btn-primary" data-hover data-magnetic>
+        <span class="btn-label">Book a demo</span>
+        <span class="btn-fill"></span>
+      </a>
+      <a href="#pricing" class="btn btn-text" data-hover>
+        <span class="btn-label">Start free trial &darr;</span>
+      </a>
+    </div>
+
+    <div class="scroll-cue">
+      <span class="scroll-line"></span>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============ RUN A BIGGER BUSINESS (value props + signal network) ============ -->
+  <section class="section grow" id="grow">
+    <div class="section-label"><span>001</span> Why DOVA</div>
+
+    <div class="network-visual reveal-scale" id="networkVisual" data-cursor-text="Explore">
+      <svg class="network-svg" viewBox="0 0 400 400" aria-hidden="true">
+        <defs>
+          <radialGradient id="pulseGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f6f5f2" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#f6f5f2" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g class="network-paths" id="networkPaths">
+          <path class="n-path" data-node="0" d="M200,200 Q240,125 200,50"/>
+          <path class="n-path" data-node="1" d="M200,200 Q283.7,214.85 342.6,153.6"/>
+          <path class="n-path" data-node="2" d="M200,200 Q211.7,284.2 288.2,321.4"/>
+          <path class="n-path" data-node="3" d="M200,200 Q123.5,237.2 111.8,321.4"/>
+          <path class="n-path" data-node="4" d="M200,200 Q141.1,138.8 57.4,153.6"/>
+        </g>
+        <g class="network-pulses" id="networkPulses">
+          <circle class="n-pulse" r="4" fill="url(#pulseGlow)" data-node="0"/>
+          <circle class="n-pulse" r="4" fill="url(#pulseGlow)" data-node="1"/>
+          <circle class="n-pulse" r="4" fill="url(#pulseGlow)" data-node="2"/>
+          <circle class="n-pulse" r="4" fill="url(#pulseGlow)" data-node="3"/>
+          <circle class="n-pulse" r="4" fill="url(#pulseGlow)" data-node="4"/>
+        </g>
+      </svg>
+
+      <div class="network-core">
+        <img src="assets/dova-mark.png" alt="" aria-hidden="true">
+      </div>
+
+      <button class="network-node" style="left:50%;top:12.5%" data-node="0" data-hover>
+        <span class="network-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/></svg></span>
+        <span class="network-node-label">Bookings</span>
+      </button>
+      <button class="network-node" style="left:85.65%;top:38.4%" data-node="1" data-hover>
+        <span class="network-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span>
+        <span class="network-node-label">Orders &amp; POS</span>
+      </button>
+      <button class="network-node" style="left:72.05%;top:80.35%" data-node="2" data-hover>
+        <span class="network-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 5h16v10H9l-5 4V5Z"/></svg></span>
+        <span class="network-node-label">Payments</span>
+      </button>
+      <button class="network-node" style="left:27.95%;top:80.35%" data-node="3" data-hover>
+        <span class="network-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20V11M11 20V4M18 20v-7"/></svg></span>
+        <span class="network-node-label">Inventory</span>
+      </button>
+      <button class="network-node" style="left:14.35%;top:38.4%" data-node="4" data-hover>
+        <span class="network-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"/><path d="M3 8.5V16l9 4.5 9-4.5V8.5"/></svg></span>
+        <span class="network-node-label">Customers</span>
+      </button>
+    </div>
+
+    <h2 class="grow-heading reveal-up">Run a bigger business with a smaller team.</h2>
+
+    <div class="valueprops">
+      <div class="valueprop reveal-up">
+        <span class="valueprop-num">01</span>
+        <div class="valueprop-body">
+          <h3>Build your business overnight.</h3>
+          <p>Live in weeks, not a year &mdash; and not six figures.</p>
+        </div>
+      </div>
+      <div class="valueprop reveal-up">
+        <span class="valueprop-num">02</span>
+        <div class="valueprop-body">
+          <h3>Two people can run what used to take ten.</h3>
+          <p>The system takes the repeat work. Your people take the customers.</p>
+        </div>
+      </div>
+      <div class="valueprop reveal-up">
+        <span class="valueprop-num">03</span>
+        <div class="valueprop-body">
+          <h3>Nothing you have to change to fit.</h3>
+          <p>Built around how you already work, not the other way round.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="grow-foot reveal-up">
+      A local startup, Angeles City, est. 2026. GCash and card, offline-first
+      when the connection drops, staff who learn it in one shift.
+    </p>
+  </section>
+
+  <!-- ============ WHAT IS DOVA (positioning) ============ -->
+  <section class="section what" id="what">
+    <div class="section-label"><span>002</span> What is DOVA</div>
+
+    <div class="split">
+      <div class="split-text reveal-left">
+        <p class="lead">
+          DOVA is a founder-led studio that builds to fit, not to template.
+        </p>
+
+        <div class="statement">
+          <h3>The problem</h3>
+          <p>
+            Off-the-shelf software makes you change how you work to suit the
+            tool. Painful at ten staff, where the workaround everyone knows
+            about is what keeps the business running.
+          </p>
+        </div>
+
+        <div class="statement">
+          <h3>Our approach</h3>
+          <p>
+            We build the other way round: your process first, the system
+            shaped to it. Presets &mdash; a website and proven automations
+            &mdash; are the starting point, not the product. Local realities
+            come standard: BIR receipting, GCash and card, offline-first when
+            the connection drops.
+          </p>
+        </div>
+      </div>
+
+      <div class="split-visual reveal-right">
+        <div class="engine-diagram" id="engineDiagram">
+          <div class="engine-pulse-line epl-1" aria-hidden="true"></div>
+          <div class="engine-pulse-line epl-2" aria-hidden="true"></div>
+          <img class="mark mark-engine" id="engineMark" src="assets/dova-mark.png" alt="" aria-hidden="true">
+          <div class="engine-tag engine-tag-1">Your website</div>
+          <div class="engine-tag engine-tag-2">Your AI agent</div>
+        </div>
+        <p class="engine-caption">
+          <strong>Same engine. Two outputs.</strong> The same AI-augmented process
+          DOVA uses to build a client's website and systems is also what becomes
+          that client's backend agents. It's what lets a small studio ship a
+          working build in weeks &mdash; not because it's cheaper, but because
+          it's faster and does more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUSTED BY ============ -->
+  <section class="section trusted" id="trusted">
+    <div class="section-label"><span>003</span> Trusted by</div>
+    <h2 class="trusted-heading reveal-up">Businesses running on what we built.</h2>
+
+    <div class="trusted-cards" id="trustedCards">
+      <article class="trusted-card tc-1" data-hover>
+        <img class="trusted-card-mark" src="assets/dova-mark.png" alt="">
+        <span class="trusted-card-tag">Drone services</span>
+        <span class="trusted-card-name">AeroTek</span>
+      </article>
+      <article class="trusted-card tc-2" data-hover>
+        <img class="trusted-card-mark" src="assets/dova-mark.png" alt="">
+        <span class="trusted-card-tag">Caf&eacute; &middot; Angeles City</span>
+        <span class="trusted-card-name">Turt&eacute;</span>
+      </article>
+      <article class="trusted-card tc-3" data-hover>
+        <img class="trusted-card-mark" src="assets/dova-mark.png" alt="">
+        <span class="trusted-card-tag">Indoor pickleball &middot; Angeles City</span>
+        <span class="trusted-card-name">Gray Kitchen</span>
+      </article>
+    </div>
+
+    <div class="trusted-foot reveal-up">
+      <p>Systems we built and still hold.</p>
+      <a href="#work" class="btn-text" data-hover><span class="btn-label">See what we built &darr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ PRESETS (horizontal pin, coverflow depth) ============ -->
+  <section class="section pillars" id="presets">
+    <div class="pillars-pin">
+      <div class="section-label light"><span>004</span> Where we start</div>
+      <div class="pillars-track" id="pillarsTrack">
+
+        <article class="pillar pillar-round" data-num="01">
+          <span class="pillar-letter">01</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset</span>
+            <h3>Bookings &amp; scheduling</h3>
+            <p>Live availability, deposits and no-show rules &mdash; set to your policy.</p>
+            <p class="pillar-quote">Best for courts, clinics, salons, studios, property viewings.</p>
+            <div class="pillar-tags">
+              <span>Deposits</span><span>Reminders</span><span>Staff view</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-round" data-num="02">
+          <span class="pillar-letter">02</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset</span>
+            <h3>Orders &amp; POS</h3>
+            <p>Counter and QR orders on one queue. Keeps selling offline, syncs after.</p>
+            <p class="pillar-quote">Best for caf&eacute;s, bars, kiosks, small restaurants.</p>
+            <div class="pillar-tags">
+              <span>Offline-first</span><span>Kitchen queue</span><span>Shift close</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-round" data-num="03">
+          <span class="pillar-letter">03</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset</span>
+            <h3>Payments &amp; receipting</h3>
+            <p>GCash, card and cash in one ledger. BIR-compliant series, void trail intact.</p>
+            <p class="pillar-quote">Best for anyone taking deposits, invoices or split payments.</p>
+            <div class="pillar-tags">
+              <span>GCash</span><span>BIR series</span><span>Void trail</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-round" data-num="04">
+          <span class="pillar-letter">04</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset</span>
+            <h3>Inventory &amp; suppliers</h3>
+            <p>Stock moves when a sale happens &mdash; in the units you actually count in.</p>
+            <p class="pillar-quote">Best for caf&eacute;s, kitchens, retail, crews holding stock.</p>
+            <div class="pillar-tags">
+              <span>Recipes</span><span>Reorder points</span><span>Wastage</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-round" data-num="05">
+          <span class="pillar-letter">05</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset</span>
+            <h3>Customers &amp; CRM</h3>
+            <p>One record per customer across bookings, orders and messages.</p>
+            <p class="pillar-quote">Best for memberships, packages, repeat-visit businesses.</p>
+            <div class="pillar-tags">
+              <span>Memberships</span><span>Packages</span><span>Segments</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-sharp" data-num="06">
+          <span class="pillar-letter">06</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset &mdash; Eos</span>
+            <h3>Owner&rsquo;s personal assistant</h3>
+            <p>Reads the whole operation overnight and hands you the morning: what sold, what slipped, who to call, what to reorder. Ask it anything in plain language &mdash; it answers from your own data.</p>
+            <p class="pillar-quote">Best for owners running two or more places, or away from the counter.</p>
+            <div class="pillar-tags">
+              <span>Morning brief</span><span>Ask anything</span><span>Chase list</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-sharp" data-num="07">
+          <span class="pillar-letter">07</span>
+          <div class="pillar-body">
+            <span class="pillar-index">Preset &mdash; Charis</span>
+            <h3>Lead generation &amp; outreach</h3>
+            <p>Captures every enquiry the site produces, keeps the list warm with an email sequence written in your voice, and routes anyone who replies straight to a human.</p>
+            <p class="pillar-quote">Best for leasing, services, B2B, anyone chasing enquiries by hand.</p>
+            <div class="pillar-tags">
+              <span>Capture forms</span><span>Email sequences</span><span>Reply routing</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar pillar-note">
+          <div class="pillar-body">
+            <span class="pillar-index">Not on the list</span>
+            <h3>Bring the awkward part.</h3>
+            <p>Most builds include something that isn&rsquo;t on this row &mdash; a deposit ladder, a commission split, a rota that follows a delivery route. It&rsquo;s usually why off-the-shelf didn&rsquo;t work.</p>
+            <a href="#contact" class="btn-text" data-hover><span class="btn-label">Tell us the awkward part &rarr;</span></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AGENT LAYER (live ticker) ============ -->
+  <section class="section agents-live" id="agents-live">
+    <div class="section-label"><span>005</span> The agent layer</div>
+    <h2 class="agents-live-heading reveal-up">Every service has a specialist behind it.</h2>
+    <p class="agents-live-copy reveal-up">
+      Every module we build has an agent trained for it &mdash; one job, one
+      domain, trained by us rather than prompted into existence. The system
+      runs fine without them. Switch one on and it works inside your data,
+      24/7, acting only where you allow it.
+    </p>
+
+    <div class="flow-cards">
+      <article class="flow-card reveal-clip">
+        <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <h3>Reads your live system</h3>
+        <p>Bookings, orders, stock, messages &mdash; the actual records as they change, not a nightly copy of them.</p>
+        <a href="#presets" data-hover>What it reads &rarr;</a>
+      </article>
+      <article class="flow-card reveal-clip">
+        <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="19" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg></span>
+        <h3>Decides on limits you set</h3>
+        <p>You write the rules in plain language: what it may approve, how far it may discount, when it must stop and ask. Anything past the line waits for you.</p>
+        <a href="#faq" data-hover>How limits work &rarr;</a>
+      </article>
+      <article class="flow-card reveal-clip">
+        <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+        <h3>Acts where you allow it</h3>
+        <p>Confirms the booking, chases the deposit, drafts the purchase order, answers the enquiry &mdash; inside your system, under your name.</p>
+        <a href="#pricing" data-hover>Turn one on &rarr;</a>
+      </article>
+      <article class="flow-card reveal-clip">
+        <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 4h14v16l-4-3-3 3-3-3-4 3V4Z"/><path d="M8 9h8M8 13h5"/></svg></span>
+        <h3>Reports every action</h3>
+        <p>Every line it touched, timestamped, in the feed below.</p>
+        <a href="#liveTicker" data-hover>See the log &rarr;</a>
+      </article>
+      <article class="flow-card reveal-clip">
+        <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h11a5 5 0 0 1 0 10H9"/><path d="M8 5 3 10l5 5"/></svg></span>
+        <h3>Nothing it does is permanent</h3>
+        <p>Undo any line. Switch an agent off and the system runs exactly as before.</p>
+        <a href="#faq" data-hover>Questions &rarr;</a>
+      </article>
+    </div>
+
+    <div class="ticker-frame reveal-up" id="liveTicker">
+      <div class="ticker-head">
+        <span class="ticker-dot"></span>
+        <span>Live &mdash; a normal Tuesday</span>
+      </div>
+      <div class="ticker-mask">
+        <div class="ticker-track" id="tickerTrack">
+          <div class="ticker-item"><span class="ticker-time">07:12</span><span class="ticker-what">Booking confirmed</span><span class="ticker-agent">HORA</span><span class="ticker-detail">Court 2, Saturday 6pm &mdash; deposit paid</span></div>
+          <div class="ticker-item"><span class="ticker-time">07:40</span><span class="ticker-what">Stock reordered</span><span class="ticker-agent">ARGO</span><span class="ticker-detail">6kg beans &mdash; supplier price up 4%, flagged</span></div>
+          <div class="ticker-item"><span class="ticker-time">08:05</span><span class="ticker-what">Deposits chased</span><span class="ticker-agent">OBOL</span><span class="ticker-detail">2 unpaid, 1 settled within the hour</span></div>
+          <div class="ticker-item"><span class="ticker-time">09:15</span><span class="ticker-what">Enquiry answered</span><span class="ticker-agent">ECHO</span><span class="ticker-detail">Unit 3B viewing moved to Thursday</span></div>
+          <div class="ticker-item"><span class="ticker-time">11:02</span><span class="ticker-what">Low stock flagged</span><span class="ticker-agent">ARGO</span><span class="ticker-detail">Oat milk under its reorder point</span></div>
+          <div class="ticker-item"><span class="ticker-time">12:20</span><span class="ticker-what">3 enquiries answered</span><span class="ticker-agent">ECHO</span><span class="ticker-detail">1 booked, 2 quoted from your price list</span></div>
+          <div class="ticker-item"><span class="ticker-time">14:45</span><span class="ticker-what">Purchase order drafted</span><span class="ticker-agent">ARGO</span><span class="ticker-detail">2 suppliers compared, cheaper one picked</span></div>
+          <div class="ticker-item"><span class="ticker-time">16:10</span><span class="ticker-what">Held for your call</span><span class="ticker-agent">OBOL</span><span class="ticker-detail">Refund above your &#8369;1,500 limit</span></div>
+          <div class="ticker-item"><span class="ticker-time">17:30</span><span class="ticker-what">Daily summary written</span><span class="ticker-agent">EOS</span><span class="ticker-detail">Sales, covers, no-shows, tomorrow&rsquo;s risks</span></div>
+          <div class="ticker-item"><span class="ticker-time">18:00</span><span class="ticker-what">Slots released</span><span class="ticker-agent">HORA</span><span class="ticker-detail">4 unclaimed holds back on the calendar</span></div>
+          <div class="ticker-item"><span class="ticker-time">19:15</span><span class="ticker-what">Tomorrow confirmed</span><span class="ticker-agent">ECHO</span><span class="ticker-detail">9 bookings texted, 1 reply pending</span></div>
+          <div class="ticker-item"><span class="ticker-time">20:40</span><span class="ticker-what">Shift closed</span><span class="ticker-agent">OBOL</span><span class="ticker-detail">Ledger reconciled, receipts filed</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="agents-live-fine reveal-up">
+      &#8369;7,999 per agent per month, cheaper as you add more. Month to month
+      on any DOVA build.
+      <a href="#pricing" data-hover>Start free trial &rarr;</a>
+    </p>
+  </section>
+
+  <!-- ============ THE SPECIALISTS ============ -->
+  <section class="section agents" id="agents">
+    <div class="section-label"><span>006</span> The specialists</div>
+    <h2 class="agents-heading reveal-up">Six agents. One job each.</h2>
+    <p class="agents-copy reveal-up">
+      We train and keep these ourselves, so they arrive knowing the work
+      rather than learning it on your account. When you onboard, we introduce
+      the ones your build actually needs &mdash; by name.
+    </p>
+
+    <div class="agent-grid" id="agentGrid">
+      <article class="agent-card agent-round reveal-up" data-tilt>
+        <span class="agent-card-name">Echo</span>
+        <span class="agent-card-role">24/7 Helpdesk</span>
+        <p>Answers every enquiry that lands &mdash; web, Messenger, SMS &mdash; in your voice and your prices. Books what it can, escalates what it should.</p>
+        <div class="pillar-tags"><span>Replies under 60s</span><span>Quotes from your list</span><span>Escalation rules</span></div>
+      </article>
+
+      <article class="agent-card agent-round reveal-up" data-tilt>
+        <span class="agent-card-name">Hora</span>
+        <span class="agent-card-role">Bookings &amp; Scheduling</span>
+        <p>Holds the calendar. Confirms, reschedules, chases deposits, releases dead holds back to the floor before the slot is wasted.</p>
+        <div class="pillar-tags"><span>Deposit chasing</span><span>No-show rules</span><span>Slot recovery</span></div>
+      </article>
+
+      <article class="agent-card agent-round reveal-up" data-tilt>
+        <span class="agent-card-name">Charis</span>
+        <span class="agent-card-role">Follow-up &amp; Reviews</span>
+        <p>Brings customers back &mdash; after a visit, after a lapse &mdash; and asks for the review at the moment they are most likely to leave one.</p>
+        <div class="pillar-tags"><span>Win-back sends</span><span>Review requests</span><span>Segment sends</span></div>
+      </article>
+
+      <article class="agent-card agent-sharp reveal-up" data-tilt>
+        <span class="agent-card-name">Argo</span>
+        <span class="agent-card-role">Smart Inventory &amp; Supplier Outreach</span>
+        <p>Watches every count against its reorder point, then acts on it &mdash; drafts the purchase order, compares supplier prices before committing, and chases the delivery that never arrived.</p>
+        <div class="pillar-tags"><span>Reorder alerts</span><span>Automated PO</span><span>Price comparison</span></div>
+      </article>
+
+      <article class="agent-card agent-sharp reveal-up" data-tilt>
+        <span class="agent-card-name">Obol</span>
+        <span class="agent-card-role">Payments &amp; Collections</span>
+        <p>Chases unpaid deposits, invoices and balances on your schedule, in your tone, and stops the moment they settle.</p>
+        <div class="pillar-tags"><span>Payment follow-up</span><span>Ageing watch</span><span>Settlement stop</span></div>
+      </article>
+
+      <article class="agent-card agent-sharp reveal-up" data-tilt>
+        <span class="agent-card-name">Eos</span>
+        <span class="agent-card-role">Owner&rsquo;s Daily Brief</span>
+        <p>Reads yesterday across every module and writes you the short version: what sold, what slipped, what needs you today.</p>
+        <div class="pillar-tags"><span>Daily summary</span><span>Anomaly flags</span><span>Weekly rollup</span></div>
+      </article>
+    </div>
+
+    <p class="agents-foot reveal-up">
+      Your build decides who you meet. A caf&eacute; that never invoices doesn&rsquo;t
+      need Obol; a leasing office almost certainly does.
+      <a href="#pricing" data-hover>What a specialist costs &rarr;</a>
+    </p>
+  </section>
+
+  <!-- ============ HOW A BUILD RUNS (pinned reveal) ============ -->
+  <section class="section help" id="process">
+    <div class="help-pin">
+      <div class="section-label"><span>007</span> How a build runs</div>
+      <h2 class="help-heading">We learn your process<br>before we write any code.</h2>
+
+      <div class="notice-list" id="processList">
+        <div class="notice-pair process-step">
+          <div class="notice-we-notice">
+            <span class="tag">01 &mdash; Days 1&ndash;3</span>
+            <p>Sit in the operation</p>
+          </div>
+          <div class="notice-arrow">&rarr;</div>
+          <div class="notice-we-say">
+            <span class="tag">The spec</span>
+            <p>A shift with your staff, mapping what actually happens &mdash; the notebook, the group chat, the workaround everyone knows about. That map is the spec.</p>
+          </div>
+        </div>
+
+        <div class="notice-pair process-step">
+          <div class="notice-we-notice">
+            <span class="tag">02 &mdash; Week 1&ndash;2</span>
+            <p>Design the front, model the data</p>
+          </div>
+          <div class="notice-arrow">&rarr;</div>
+          <div class="notice-we-say">
+            <span class="tag">One record</span>
+            <p>Presets that fit go in; the rest is designed to your map. A booking on the site and one at the counter are the same record.</p>
+          </div>
+        </div>
+
+        <div class="notice-pair process-step">
+          <div class="notice-we-notice">
+            <span class="tag">03 &mdash; Week 2&ndash;4</span>
+            <p>Build and pilot live</p>
+          </div>
+          <div class="notice-arrow">&rarr;</div>
+          <div class="notice-we-say">
+            <span class="tag">Real transactions</span>
+            <p>A working build in week two, run alongside your current process on real transactions. What doesn&rsquo;t fit gets changed.</p>
+          </div>
+        </div>
+
+        <div class="notice-pair process-step">
+          <div class="notice-we-notice">
+            <span class="tag">04 &mdash; Week 4 onward</span>
+            <p>Hand over, then stay on</p>
+          </div>
+          <div class="notice-arrow">&rarr;</div>
+          <div class="notice-we-say">
+            <span class="tag">Keeps adapting</span>
+            <p>Training in two sessions. After launch we keep adapting it &mdash; new season, new branch, new rule.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SELECTED WORK (pinned 3D card stack, draggable) ============ -->
+  <section class="section verticals" id="work">
+    <div class="verticals-pin">
+      <div class="section-label light"><span>008</span> Selected work</div>
+      <h2 class="work-pin-heading light">Same studio, three different systems.</h2>
+      <p class="work-pin-hint light">Try dragging it</p>
+
+      <div class="card-stack" id="cardStack">
+        <article class="vcard" data-index="0">
+          <div class="vcard-inner">
+            <span class="vcard-num">Caf&eacute; &middot; Angeles City</span>
+            <h3>Turt&eacute;</h3>
+            <p class="vcard-desc">An offline smart POS with inventory tracking and supplier ordering built in &mdash; and an SDK inside the system, so the build can be extended without us.</p>
+            <div class="vcard-stats">
+              <div class="vstat"><span class="vstat-num" data-count-to="1000" data-suffix="+">0</span><span class="vstat-label">Orders handled</span></div>
+              <div class="vstat"><span class="vstat-num" data-static="Live">&nbsp;</span><span class="vstat-label">Running daily</span></div>
+            </div>
+            <div class="vcard-package">Powered by Argo</div>
+          </div>
+        </article>
+
+        <article class="vcard" data-index="1">
+          <div class="vcard-inner">
+            <span class="vcard-num">Indoor pickleball &middot; Angeles City</span>
+            <h3>Gray Kitchen Pickleball Courts</h3>
+            <p class="vcard-desc">Booking site and court system for two indoor courts &mdash; live availability, deposits, and both courts bookable together.</p>
+            <div class="vcard-stats">
+              <div class="vstat"><span class="vstat-num" data-count-to="10000" data-prefix="&#8369;" data-suffix="+">0</span><span class="vstat-label">Booked in 2 months</span></div>
+              <div class="vstat"><span class="vstat-num" data-static="24/7">&nbsp;</span><span class="vstat-label">Self-serve booking</span></div>
+            </div>
+            <div class="vcard-package">Powered by Hora</div>
+          </div>
+        </article>
+
+        <article class="vcard" data-index="2">
+          <div class="vcard-inner">
+            <span class="vcard-num">Drone services</span>
+            <h3>AeroTek</h3>
+            <p class="vcard-desc">Quote to flight schedule to client handover, in one thread.</p>
+            <div class="vcard-stats">
+              <div class="vstat"><span class="vstat-num" data-static="1">&nbsp;</span><span class="vstat-label">Quote to delivery</span></div>
+              <div class="vstat"><span class="vstat-num" data-static="Live">&nbsp;</span><span class="vstat-label">Fleet scheduling</span></div>
+            </div>
+            <div class="vcard-package">Quote &rarr; Flight plan &rarr; Deliverable</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="card-progress" id="cardProgress">
+        <span class="dot active" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
+        <span class="dot" data-i="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="section pricing" id="pricing">
+    <div class="section-label"><span>009</span> Pricing</div>
+    <h2 class="pricing-heading reveal-up">Multinational standard.<br>Local price.</h2>
+    <p class="pricing-copy reveal-up">
+      Built to the standard multinationals pay for, priced for the business
+      down the road. No tiers to decode. &#8369;24,999 to install, &#8369;2,500
+      a month to keep it running and changing &mdash; then a per-agent fee only
+      if you put a specialist on live duty.
+    </p>
+
+    <div class="pricing-cards">
+      <div class="price-card reveal-left">
+        <span class="price-card-label">Installation</span>
+        <p class="price-card-note">One time. Your site and the system underneath it, shaped to how you actually work.</p>
+        <div class="price-num"><span class="price-currency">&#8369;</span><span data-count-to="24999">0</span></div>
+        <span class="price-per">one-time</span>
+        <ul class="price-features">
+          <li>Custom site, built to your brand</li>
+          <li>The presets that fit your operation</li>
+          <li>Reworked to your rules, not ours</li>
+          <li>Custom logic where presets don&rsquo;t fit</li>
+          <li>GCash, card and cash in one ledger</li>
+          <li>Staff and owner training</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" data-hover><span class="btn-label">Book a demo</span><span class="btn-fill"></span></a>
+      </div>
+
+      <div class="price-card price-card-dark reveal-right">
+        <span class="price-card-label">Maintenance</span>
+        <p class="price-card-note">Monthly, from launch onward. Cancel anytime &mdash; the code and the data are yours.</p>
+        <div class="price-num"><span class="price-currency">&#8369;</span><span data-count-to="2500">0</span></div>
+        <span class="price-per">per month</span>
+        <ul class="price-features">
+          <li>Hosting, domain, backups</li>
+          <li>Security patches and uptime</li>
+          <li>Changes as your rules change</li>
+          <li>New season, new branch, new staff</li>
+          <li>Support on a real phone number</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" data-hover><span class="btn-label">Talk it through</span><span class="btn-fill"></span></a>
+      </div>
+    </div>
+
+    <div class="agent-tiers-head reveal-up">
+      <h3>Live agents &mdash; priced per specialist</h3>
+      <p>Each agent runs 24/7 inside your system, on top of maintenance. The first costs the most; the desk gets cheaper as it fills.</p>
+    </div>
+
+    <div class="agent-tiers">
+      <div class="tier reveal-up">
+        <span class="tier-name">First specialist</span>
+        <p>Usually Echo or Hora &mdash; whichever job eats your evenings.</p>
+        <div class="tier-price"><span class="price-currency">&#8369;</span><span data-count-to="7999">0</span><span class="tier-per">/month</span></div>
+      </div>
+      <div class="tier reveal-up">
+        <span class="tier-name">Second and third</span>
+        <p>Each, once the first has earned its keep.</p>
+        <div class="tier-price"><span class="price-currency">&#8369;</span><span data-count-to="6499">0</span><span class="tier-per">each/month</span></div>
+      </div>
+      <div class="tier reveal-up">
+        <span class="tier-name">Fourth onward</span>
+        <p>They share your data, so each new one costs us less to run.</p>
+        <div class="tier-price"><span class="price-currency">&#8369;</span><span data-count-to="4999">0</span><span class="tier-per">each/month</span></div>
+      </div>
+      <div class="tier tier-dark reveal-up">
+        <span class="tier-name">The full desk &mdash; all six</span>
+        <p>Every specialist live, one line on the invoice.</p>
+        <div class="tier-price"><span class="price-currency">&#8369;</span><span data-count-to="29999">0</span><span class="tier-per">/month</span></div>
+      </div>
+    </div>
+
+    <p class="pricing-fine reveal-up">
+      Installation covers a standard build; unusually large operations or
+      multi-branch rollouts are quoted separately. Agents are month to month
+      and can be switched off. Two-week trial on your first specialist, no
+      build commitment.
+    </p>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section faq" id="faq">
+    <div class="section-label"><span>010</span> Questions</div>
+    <h2 class="faq-heading reveal-up">The ones we always get.</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>Do I have to take the agents?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>No. The website and the system are the product and they work fully on their own &mdash; installation plus maintenance, nothing else. Specialists are a per-agent add-on you switch on later, if and when the operation is running clean.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>How much of it is actually custom?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>Typically half. Presets cover the plumbing every business shares &mdash; accounts, payments, records, hosting &mdash; so budget goes to what&rsquo;s specific to you. If a build turns out 90% preset, we&rsquo;ll say so and quote it lower.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>What do the agents cost, and can I start with one?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>&#8369;7,999/month for your first specialist, &#8369;6,499 each for the second and third, &#8369;4,999 each after that, or &#8369;29,999 for all six. That sits on top of your maintenance monthly. Almost everyone starts with one &mdash; usually Echo on enquiries or Hora on bookings &mdash; and adds the next once they stop checking its work.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>What happens when the internet goes down?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>Counter tools keep working offline and queue locally; the queue syncs and reconciles when the connection returns. Standard on every build, not an upgrade.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>Is the receipting actually BIR-compliant?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>Yes &mdash; correct series, sequence and void trail for your registration type. Set up with your bookkeeper during the build so what the system prints matches what gets filed.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>Who owns the code and the data?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>You do. The repository and the database are yours, and we&rsquo;ll hand over both on request. The monthly buys hosting, support and changes &mdash; not hostage-keeping.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-hover>
+          <span>How small is too small?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer"><p>If you&rsquo;re running one counter and the notebook still works, wait. Where this pays for itself is a second branch, a second shift, or the point where you stop being physically present for every transaction.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT / CLOSE ============ -->
+  <section class="section contact" id="contact">
+    <div class="section-label"><span>011</span> Let's talk</div>
+
+    <h2 class="contact-heading">
+      <span class="line"><span class="line-inner">Show us how</span></span>
+      <span class="line"><span class="line-inner">you actually work.</span></span>
+    </h2>
+    <p class="contact-sub">Thirty minutes, no deck. Walk us through a normal day and we'll tell you which presets fit, what has to be built, and roughly what it costs. We're small, we're local, and we answer our own phone.</p>
+
+    <form class="contact-form" id="contactForm">
+      <div class="field">
+        <input type="text" id="f-name" name="name" required placeholder=" ">
+        <label for="f-name">Your name</label>
+      </div>
+      <div class="field">
+        <input type="text" id="f-business" name="business" required placeholder=" ">
+        <label for="f-business">Business name</label>
+      </div>
+      <div class="field">
+        <input type="email" id="f-email" name="email" required placeholder=" ">
+        <label for="f-email">Email</label>
+      </div>
+      <div class="field">
+        <select id="f-type" name="type" required>
+          <option value="" disabled selected></option>
+          <option>Caf&eacute; or restaurant</option>
+          <option>Booking / courts / clinic / salon</option>
+          <option>Leasing or services</option>
+          <option>Retail with stock</option>
+          <option>Something else</option>
+        </select>
+        <label for="f-type" class="label-select">What do you run?</label>
+      </div>
+      <div class="field field-full">
+        <textarea id="f-message" name="message" rows="3" placeholder=" "></textarea>
+        <label for="f-message">What's slowing you down right now? (optional)</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-submit" data-hover data-magnetic>
+        <span class="btn-label">Book a demo</span>
+        <span class="btn-fill"></span>
+      </button>
+    </form>
+
+    <div class="contact-success" id="contactSuccess">
+      <svg class="success-morph" id="successMorph" viewBox="0 0 120 120" aria-hidden="true">
+        <path id="successMorphPath" d="M60,10 C82,10 100,28 100,50 C100,72 82,90 60,90 C38,90 20,72 20,50 C20,28 38,10 60,10 Z" fill="none" stroke="var(--white)" stroke-width="2.5"/>
+        <path id="successCheckPath" d="M40,52 L53,65 L82,36" fill="none" stroke="var(--white)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60"/>
+      </svg>
+      <h3>Thanks &mdash; that's it.</h3>
+      <p>We'll read it ourselves and reply with a straight answer.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img class="mark mark-footer" id="footerMark" src="assets/dova-mark.png" alt="DOVA">
+      <p>A local startup building<br>affordable systems for<br>businesses ready to grow.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#grow" data-hover>Why DOVA</a>
+      <a href="#what" data-hover>What is DOVA</a>
+      <a href="#presets" data-hover>Presets</a>
+      <a href="#agents" data-hover>Agents</a>
+      <a href="#process" data-hover>How it runs</a>
+      <a href="#work" data-hover>Work</a>
+      <a href="#pricing" data-hover>Pricing</a>
+      <a href="#faq" data-hover>FAQ</a>
+    </div>
+    <div class="footer-meta">
+      <p>Angeles City, Pampanga, Philippines</p>
+      <p><a href="mailto:hello@dova.ph" data-hover>hello@dova.ph</a></p>
+    </div>
+  </div>
+
+  <div class="footer-marquee">
+    <div class="marquee-track">
+      <span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span><span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span><span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span><span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+      <span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span><span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span><span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span><span>DOVA&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 DOVA &middot; Established 2026</span>
+    <span>Angeles City &middot; Pampanga &middot; PH</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="js/main-v2.js"></script>
+</body>
+</html>
