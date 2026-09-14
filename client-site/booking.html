@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a session — The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">The Commons</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="booking.html" class="active">Book</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="site-main">
+  <div class="page-head">
+    <h1>Book a session</h1>
+    <p>Courts, haircuts, facials, or a drone session &mdash; pick what you need. This booking is real: it's written straight to the same database the DOVA admin sandbox reads from.</p>
+  </div>
+
+  <form class="form-card" id="bookingForm">
+    <div class="form-field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" required>
+    </div>
+    <div class="form-field">
+      <label for="service">Service</label>
+      <select id="service" required>
+        <option value="">Choose one&hellip;</option>
+        <option value="Court booking">Court booking</option>
+        <option value="Haircut &amp; color">Haircut &amp; color</option>
+        <option value="Facial treatment">Facial treatment</option>
+        <option value="Drone session">Drone session</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="date">Date</label>
+      <input type="date" id="date" required>
+    </div>
+    <div class="form-field">
+      <label for="time">Time</label>
+      <input type="time" id="time" required>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Request booking</button>
+    <p class="form-error" id="formError"></p>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <h3>Booking requested</h3>
+    <p>Thanks &mdash; we've got it. Hora would normally confirm this and chase the deposit; for now it's sitting as "pending" in the admin dashboard.</p>
+  </div>
+</main>
+
+<footer class="site-footer">The Commons &middot; a sandbox business, for testing DOVA's agents &middot; <a class="admin-trigger" href="admin/login.html" tabindex="-1">&copy;</a> 2026</footer>
+
+<script src="client-data.js"></script>
+<script>
+  var form = document.getElementById('bookingForm');
+  var errEl = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.classList.remove('visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending&hellip;';
+
+    var name = document.getElementById('name').value.trim();
+    var service = document.getElementById('service').value;
+    var date = document.getElementById('date').value;
+    var time = document.getElementById('time').value;
+    var start = new Date(date + 'T' + time);
+    var end = new Date(start.getTime() + 60 * 60 * 1000);
+
+    insertRow('bookings', {
+      customer_name: name,
+      service: service,
+      resource: service === 'Court booking' ? 'Court (TBD)' : null,
+      start_time: start.toISOString(),
+      end_time: end.toISOString(),
+      status: 'pending',
+      deposit_paid: false
+    }).then(function () {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('visible');
+    }).catch(function (err) {
+      errEl.textContent = err.message;
+      errEl.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Request booking';
+    });
+  });
+</script>
+<script src="client-widget.js"></script>
+<script>initPageAgent('Hora', "Hora confirms bookings, chases deposits, and releases dead holds once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+</body>
+</html>

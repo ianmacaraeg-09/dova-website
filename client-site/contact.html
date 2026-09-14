@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">The Commons</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="booking.html">Book</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<main class="site-main">
+  <div class="page-head">
+    <h1>Ask us anything</h1>
+    <p>Questions about slots, pricing, or anything else &mdash; this creates a real enquiry record for Echo to eventually answer, in your voice and your prices.</p>
+  </div>
+
+  <form class="form-card" id="contactForm">
+    <div class="form-field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" required>
+    </div>
+    <div class="form-field">
+      <label for="message">Your question</label>
+      <textarea id="message" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Send</button>
+    <p class="form-error" id="formError"></p>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <h3>Sent</h3>
+    <p>We've got your question. Echo would normally reply within a minute or so &mdash; for now it's sitting as "open" in the admin dashboard.</p>
+  </div>
+</main>
+
+<footer class="site-footer">The Commons &middot; a sandbox business, for testing DOVA's agents &middot; <a class="admin-trigger" href="admin/login.html" tabindex="-1">&copy;</a> 2026</footer>
+
+<script src="client-data.js"></script>
+<script>
+  var form = document.getElementById('contactForm');
+  var errEl = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.classList.remove('visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending&hellip;';
+
+    var name = document.getElementById('name').value.trim();
+    var message = document.getElementById('message').value.trim();
+
+    insertRow('enquiries', {
+      customer_name: name,
+      channel: 'web',
+      message: message,
+      status: 'open'
+    }).then(function () {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('visible');
+    }).catch(function (err) {
+      errEl.textContent = err.message;
+      errEl.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send';
+    });
+  });
+</script>
+<script src="client-widget.js"></script>
+<script>initPageAgent('Echo', "Echo answers every enquiry that lands, in your voice and your prices, once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+</body>
+</html>

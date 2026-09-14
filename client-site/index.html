@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">The Commons</a>
+  <nav class="site-nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="booking.html">Book</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="site-main">
+  <div class="hero">
+    <h1>Courts, care, and coffee &mdash; all in one place.</h1>
+    <p>The Commons is a small community space in town: book a court or a treatment room, grab something from the counter, or just say hello. This is a sandbox site simulating a real DOVA client &mdash; every page here is where a specialist agent will eventually live.</p>
+    <div class="hero-actions">
+      <a href="booking.html" class="btn btn-primary">Book a session</a>
+      <a href="shop.html" class="btn btn-ghost">See what's in stock</a>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3>Book a session</h3>
+      <p>Courts, haircuts, facials, drone sessions &mdash; one calendar. This page belongs to <strong>Hora</strong>.</p>
+    </div>
+    <div class="info-card">
+      <h3>Browse the shop</h3>
+      <p>What we're currently stocked with, straight from our inventory. This page belongs to <strong>Argo</strong>.</p>
+    </div>
+    <div class="info-card">
+      <h3>Checkout</h3>
+      <p>Settle a balance or pay for a session. This page belongs to <strong>Obol</strong>.</p>
+    </div>
+    <div class="info-card">
+      <h3>Reviews &amp; enquiries</h3>
+      <p>Leave a review or ask us anything &mdash; two different specialists, two different pages: <strong>Charis</strong> and <strong>Echo</strong>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">The Commons &middot; a sandbox business, for testing DOVA's agents &middot; <a class="admin-trigger" href="admin/login.html" tabindex="-1">&copy;</a> 2026</footer>
+
+<script src="client-widget.js"></script>
+<script>initPageAgent('Echo', "Echo answers general questions site-wide once it's wired up. Not connected yet.");</script>
+</body>
+</html>

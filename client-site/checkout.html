@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">The Commons</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="booking.html">Book</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html" class="active">Checkout</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="site-main">
+  <div class="page-head">
+    <h1>Checkout</h1>
+    <p>Settle a balance for a session or a shop item. No real payment happens here &mdash; this creates a real invoice record for Obol to eventually chase or reconcile.</p>
+  </div>
+
+  <form class="form-card" id="checkoutForm">
+    <div class="form-field">
+      <label for="name">Name on the invoice</label>
+      <input type="text" id="name" required>
+    </div>
+    <div class="form-field">
+      <label for="amount">Amount (&#8369;)</label>
+      <input type="number" id="amount" min="1" step="0.01" required>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Create invoice</button>
+    <p class="form-error" id="formError"></p>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <h3>Invoice created</h3>
+    <p>It's sitting as "pending" now. Obol would normally chase it on your schedule and stop the moment it's marked paid.</p>
+  </div>
+</main>
+
+<footer class="site-footer">The Commons &middot; a sandbox business, for testing DOVA's agents &middot; <a class="admin-trigger" href="admin/login.html" tabindex="-1">&copy;</a> 2026</footer>
+
+<script src="client-data.js"></script>
+<script>
+  var form = document.getElementById('checkoutForm');
+  var errEl = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.classList.remove('visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creating&hellip;';
+
+    var name = document.getElementById('name').value.trim();
+    var amount = parseFloat(document.getElementById('amount').value);
+    var dueDate = new Date().toISOString().slice(0, 10);
+
+    insertRow('invoices', {
+      customer_name: name,
+      amount: amount,
+      status: 'pending',
+      due_date: dueDate
+    }).then(function () {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('visible');
+    }).catch(function (err) {
+      errEl.textContent = err.message;
+      errEl.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Create invoice';
+    });
+  });
+</script>
+<script src="client-widget.js"></script>
+<script>initPageAgent('Obol', "Obol chases unpaid balances and stops the moment they settle, once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+</body>
+</html>

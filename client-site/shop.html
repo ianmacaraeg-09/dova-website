@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">The Commons</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="booking.html">Book</a>
+    <a href="shop.html" class="active">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="site-main">
+  <div class="page-head">
+    <h1>What's in stock</h1>
+    <p>Live from our own inventory &mdash; the same records Argo watches for reorder points. This is read-only: a real storefront wouldn't let visitors edit stock, just see it.</p>
+  </div>
+
+  <div id="catalogWrap">Loading&hellip;</div>
+</main>
+
+<footer class="site-footer">The Commons &middot; a sandbox business, for testing DOVA's agents &middot; <a class="admin-trigger" href="admin/login.html" tabindex="-1">&copy;</a> 2026</footer>
+
+<script src="client-data.js"></script>
+<script>
+  fetchPublicTable('inventory_items', 'select=name,unit,quantity_on_hand,reorder_point&order=name.asc').then(function (rows) {
+    var wrap = document.getElementById('catalogWrap');
+    if (!rows.length) { wrap.innerHTML = '<p>Nothing in stock right now.</p>'; return; }
+    var body = rows.map(function (r) {
+      var low = Number(r.quantity_on_hand) <= Number(r.reorder_point);
+      return '<tr><td>' + r.name + '</td><td>' + r.quantity_on_hand + ' ' + r.unit + '</td>' +
+        '<td><span class="stock-pill ' + (low ? 'low' : 'ok') + '">' + (low ? 'Low stock' : 'In stock') + '</span></td></tr>';
+    }).join('');
+    wrap.innerHTML = '<table class="catalog-table"><thead><tr><th>Item</th><th>On hand</th><th>Status</th></tr></thead><tbody>' + body + '</tbody></table>';
+  }).catch(function (err) {
+    document.getElementById('catalogWrap').textContent = 'Could not load the catalog: ' + err.message;
+  });
+</script>
+<script src="client-widget.js"></script>
+<script>initPageAgent('Argo', "Argo watches stock levels and handles supplier reordering once it's wired up. Not connected yet.");</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews — The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">The Commons</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="booking.html">Book</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="reviews.html" class="active">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="site-main">
+  <div class="page-head">
+    <h1>Stay in touch</h1>
+    <p>Enjoyed your visit? Leave your name and we'll follow up. This creates a real lead record for Charis to eventually reach back out on &mdash; win-back sends, review requests, that kind of thing.</p>
+  </div>
+
+  <form class="form-card" id="reviewForm">
+    <div class="form-field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" required>
+    </div>
+    <div class="form-field">
+      <label for="source">How did you hear about us?</label>
+      <select id="source" required>
+        <option value="website">Website</option>
+        <option value="referral">A friend / referral</option>
+        <option value="walk-in">Just walked in</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+    <p class="form-error" id="formError"></p>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <h3>Thanks for the review</h3>
+    <p>You're now in our follow-up list. Charis would normally reach back out at the right moment &mdash; win-back sends, review nudges, that kind of thing.</p>
+  </div>
+</main>
+
+<footer class="site-footer">The Commons &middot; a sandbox business, for testing DOVA's agents &middot; <a class="admin-trigger" href="admin/login.html" tabindex="-1">&copy;</a> 2026</footer>
+
+<script src="client-data.js"></script>
+<script>
+  var form = document.getElementById('reviewForm');
+  var errEl = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.classList.remove('visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting&hellip;';
+
+    var name = document.getElementById('name').value.trim();
+    var source = document.getElementById('source').value;
+
+    insertRow('leads', {
+      name: name,
+      source: source,
+      stage: 'new'
+    }).then(function () {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('visible');
+    }).catch(function (err) {
+      errEl.textContent = err.message;
+      errEl.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    });
+  });
+</script>
+<script src="client-widget.js"></script>
+<script>initPageAgent('Charis', "Charis sends win-back messages and asks for reviews at the right moment, once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+</body>
+</html>

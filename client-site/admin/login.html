@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — The Commons</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../admin/admin.css">
+</head>
+<body>
+
+<div class="login-wrap">
+  <img src="../../assets/dova-wordmark.png" alt="DOVA" class="login-logo">
+  <h1 class="login-title">Owner sign-in</h1>
+  <p class="login-sub">The Commons runs on DOVA's admin panel &mdash; same account, same real Supabase Auth as the main dova-website admin.</p>
+
+  <form class="login-form" id="loginForm">
+    <div class="login-field">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" required autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" required autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn-login" id="loginSubmit">Sign in</button>
+    <p class="login-error" id="loginError" hidden></p>
+  </form>
+</div>
+
+<script src="../../admin/supabase-auth.js"></script>
+<script>
+  if (isLoggedIn()) location.href = 'eos.html';
+
+  var form = document.getElementById('loginForm');
+  var errEl = document.getElementById('loginError');
+  var submitBtn = document.getElementById('loginSubmit');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Signing in…';
+
+    var email = document.getElementById('loginEmail').value.trim();
+    var password = document.getElementById('loginPassword').value;
+
+    signIn(email, password).then(function () {
+      location.href = 'eos.html';
+    }).catch(function (err) {
+      errEl.textContent = err.message;
+      errEl.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Sign in';
+    });
+  });
+</script>
+</body>
+</html>
