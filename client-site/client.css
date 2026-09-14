@@ -100,13 +100,16 @@ p{ margin:0; }
 }
 .agent-widget-bubble:hover{ transform:scale(1.06); }
 .agent-widget-panel{
-  position:absolute; bottom:66px; right:0; width:300px; max-width:calc(100vw - 48px);
-  max-height:min(70vh,460px); display:flex; flex-direction:column; overflow:hidden;
+  position:absolute; bottom:66px; right:0; width:328px; max-width:calc(100vw - 48px);
+  display:flex; flex-direction:column; overflow:hidden;
   background:var(--panel); border:1px solid var(--line); border-radius:16px;
   box-shadow:0 16px 40px rgba(43,36,32,.2);
   opacity:0; transform:translateY(14px) scale(.96); pointer-events:none; transition:opacity .2s, transform .2s;
 }
 .agent-widget.open .agent-widget-panel{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+/* the one real chat widget (Echo) gets Eos's exact fixed height; the
+   simple "coming soon" note panels stay auto-sized to their short text */
+.agent-widget-panel:has(.agent-widget-header){ height:440px; max-height:calc(100vh - 120px); }
 
 /* simple "coming soon" note (the five agents with no backend yet) */
 .agent-widget-simple-body{ padding:18px; }
