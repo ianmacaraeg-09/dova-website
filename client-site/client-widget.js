@@ -12,8 +12,10 @@ function initPageAgent(agentName, note) {
   root.innerHTML =
     '<button class="agent-widget-bubble" aria-label="' + agentName + '">' + agentName.charAt(0) + '</button>' +
     '<div class="agent-widget-panel">' +
-      '<div class="agent-widget-name">' + agentName + '</div>' +
-      '<div class="agent-widget-note">' + note + '</div>' +
+      '<div class="agent-widget-simple-body">' +
+        '<div class="agent-widget-name">' + agentName + '</div>' +
+        '<div class="agent-widget-note">' + note + '</div>' +
+      '</div>' +
     '</div>';
   document.body.appendChild(root);
 

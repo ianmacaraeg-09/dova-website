@@ -27,7 +27,7 @@
 <main class="site-main">
   <div class="page-head">
     <h1>Ask us anything</h1>
-    <p>Questions about slots, pricing, or anything else &mdash; this creates a real enquiry record for Echo to eventually answer, in your voice and your prices.</p>
+    <p>Echo is live in the corner &mdash; ask it about pricing or anything else, right now. Prefer to leave a written note instead? The form below logs a real enquiry record for later follow-up.</p>
   </div>
 
   <form class="form-card" id="contactForm">
@@ -82,7 +82,13 @@
     });
   });
 </script>
-<script src="client-widget.js"></script>
-<script>initPageAgent('Echo', "Echo answers every enquiry that lands, in your voice and your prices, once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+<script src="../admin/widget.js"></script>
+<script>
+  initAgentWidget({
+    agentName: 'Echo',
+    endpoint: 'http://127.0.0.1:8788/chat',
+    enabled: true
+  });
+</script>
 </body>
 </html>
