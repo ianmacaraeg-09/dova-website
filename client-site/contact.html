@@ -36,6 +36,10 @@
       <input type="text" id="name" required>
     </div>
     <div class="form-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+    </div>
+    <div class="form-field">
       <label for="message">Your question</label>
       <textarea id="message" rows="4" required></textarea>
     </div>
@@ -64,10 +68,12 @@
     submitBtn.textContent = 'Sending&hellip;';
 
     var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
     var message = document.getElementById('message').value.trim();
 
     insertRow('enquiries', {
       customer_name: name,
+      email: email,
       channel: 'web',
       message: message,
       status: 'open'

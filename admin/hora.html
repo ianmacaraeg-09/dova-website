@@ -49,6 +49,7 @@
     document.getElementById('rowsCount').textContent = rows.length + ' total';
     renderTable('rowsTable', rows, [
       { label: 'Customer', key: 'customer_name' },
+      { label: 'Email', render: function (r) { return r.email || '&mdash;'; } },
       { label: 'Service', key: 'service' },
       { label: 'Resource', render: function (r) { return r.resource || '&mdash;'; } },
       { label: 'When', render: function (r) { return fmtDateTime(r.start_time); } },

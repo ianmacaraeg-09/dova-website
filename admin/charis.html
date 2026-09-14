@@ -49,6 +49,7 @@
     document.getElementById('rowsCount').textContent = rows.length + ' total';
     renderTable('rowsTable', rows, [
       { label: 'Name', key: 'name' },
+      { label: 'Email', render: function (r) { return r.email || '&mdash;'; } },
       { label: 'Source', render: function (r) { return pill(r.source); } },
       { label: 'Last contacted', render: function (r) { return fmtDate(r.last_contacted_at); } },
       { label: 'Stage', render: function (r) {

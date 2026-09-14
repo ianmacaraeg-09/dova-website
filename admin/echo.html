@@ -49,6 +49,7 @@
     document.getElementById('rowsCount').textContent = rows.length + ' total';
     renderTable('rowsTable', rows, [
       { label: 'From', key: 'customer_name' },
+      { label: 'Email', render: function (r) { return r.email || '&mdash;'; } },
       { label: 'Channel', render: function (r) { return pill(r.channel); } },
       { label: 'Message', key: 'message' },
       { label: 'Status', render: function (r) {
