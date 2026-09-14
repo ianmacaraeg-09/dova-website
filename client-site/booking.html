@@ -30,6 +30,8 @@
     <p>Courts, haircuts, facials, or a drone session &mdash; pick what you need. This booking is real: it's written straight to the same database the DOVA admin sandbox reads from.</p>
   </div>
 
+  <div id="priceListWrap" style="margin-bottom:36px;">Loading prices&hellip;</div>
+
   <form class="form-card" id="bookingForm">
     <div class="form-field">
       <label for="name">Your name</label>
@@ -67,6 +69,18 @@
 
 <script src="client-data.js"></script>
 <script>
+  fetchPublicTable('services', 'select=name,description,price,unit&order=name.asc').then(function (rows) {
+    var wrap = document.getElementById('priceListWrap');
+    if (!rows.length) { wrap.innerHTML = ''; return; }
+    var body = rows.map(function (r) {
+      return '<tr><td>' + r.name + '</td><td>' + (r.description || '') + '</td>' +
+        '<td>&#8369;' + Number(r.price).toLocaleString('en-US') + ' ' + r.unit + '</td></tr>';
+    }).join('');
+    wrap.innerHTML = '<table class="catalog-table"><thead><tr><th>Service</th><th>What you get</th><th>Price</th></tr></thead><tbody>' + body + '</tbody></table>';
+  }).catch(function (err) {
+    document.getElementById('priceListWrap').textContent = 'Could not load pricing: ' + err.message;
+  });
+
   var form = document.getElementById('bookingForm');
   var errEl = document.getElementById('formError');
   var submitBtn = document.getElementById('submitBtn');
