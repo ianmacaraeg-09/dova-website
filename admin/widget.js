@@ -19,14 +19,13 @@ function initAgentWidget(config) {
   var enabled = !!config.enabled;
   var surface = config.surface;
   var getAccessToken = config.getAccessToken;
-  var hasBlobAvatar = config.avatar === 'blob';
   var sessionKey = 'dova_' + agentName.toLowerCase() + '_session_id';
 
   var root = document.createElement('div');
   root.className = 'agent-widget';
   root.innerHTML =
-    '<button class="agent-widget-bubble' + (hasBlobAvatar ? ' has-blob' : '') + '" aria-label="Open ' + agentName + ' chat">' +
-      (hasBlobAvatar ? '<div class="agent-avatar-blob"></div>' : agentName.charAt(0)) +
+    '<button class="agent-widget-bubble" aria-label="Open ' + agentName + ' chat">' +
+      agentName.charAt(0) +
       '<span class="agent-widget-bubble-dot"></span>' +
     '</button>' +
     '<div class="agent-widget-panel">' +
@@ -107,21 +106,6 @@ function initAgentWidget(config) {
 
   addText('assistant', "Hi, I'm " + agentName + ". Ask me anything.");
 
-  if (hasBlobAvatar) {
-    var stage = document.createElement('div');
-    stage.className = 'agent-widget-avatar-stage';
-    stage.innerHTML = '<div class="agent-avatar-blob"></div>';
-    messages.appendChild(stage);
-  }
-  /* Both the bubble's mini blob and the stage's big blob toggle together —
-     queried fresh (not cached) since the stage one is added after the bubble. */
-  function setTalking(isTalking) {
-    if (!hasBlobAvatar) return;
-    root.querySelectorAll('.agent-avatar-blob').forEach(function (el) {
-      el.classList.toggle('talking', isTalking);
-    });
-  }
-
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var text = input.value.trim();
@@ -130,7 +114,6 @@ function initAgentWidget(config) {
     input.value = '';
 
     var typing = addMessage('assistant typing', '<span></span><span></span><span></span>');
-    setTalking(true);
 
     try {
       var payload = { message: text, session_id: sessionId };
@@ -152,13 +135,11 @@ function initAgentWidget(config) {
       addMessage('assistant', renderReplyText(data.reply));
       dot.classList.add('live');
       statusEl.textContent = 'Connected';
-      setTalking(false);
     } catch (err) {
       typing.remove();
       addText('error', 'Could not reach ' + agentName + ' — is the backend running at ' + endpoint + '?');
       dot.classList.remove('live');
       statusEl.textContent = 'Offline';
-      setTalking(false);
     }
   });
 }
