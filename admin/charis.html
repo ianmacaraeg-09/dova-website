@@ -24,7 +24,7 @@
   <div class="agent-page-header">
     <h1 class="agent-page-name">Charis</h1>
     <span class="agent-page-role">Follow-up &amp; Reviews</span>
-    <p class="agent-page-note">Brings customers back and asks for the review at the moment they're most likely to leave one. No backend built yet, so the chat below is a placeholder; the leads themselves are real sandbox data.</p>
+    <p class="agent-page-note">Finds who needs follow-up &mdash; stale enquiries, lapsed customers, recent no-shows, stale leads &mdash; and drafts the outreach message. It never sends on its own: everything it drafts gets logged here for a human to review and send. Ask it "who needs follow-up right now" in the chat in the corner.</p>
   </div>
 
   <div class="data-section">
@@ -63,7 +63,11 @@
 </script>
 <script src="widget.js"></script>
 <script>
-  initAgentWidget({ agentName: 'Charis', endpoint: '', enabled: false });
+  initAgentWidget({
+    agentName: 'Charis',
+    endpoint: 'http://127.0.0.1:8789/chat',
+    enabled: true
+  });
 </script>
 </body>
 </html>

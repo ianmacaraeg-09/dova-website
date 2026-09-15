@@ -27,7 +27,7 @@
 <main class="site-main">
   <div class="page-head">
     <h1>Book a session</h1>
-    <p>Courts, haircuts, facials, or a drone session &mdash; pick what you need. This booking is real: it's written straight to the same database the DOVA admin sandbox reads from.</p>
+    <p>Hora is live in the corner &mdash; tell it what you want and when, right now. Prefer to fill it in yourself? Courts, haircuts, facials, or a drone session, pick what you need below. Either way this booking is real: it's written straight to the same database the DOVA admin sandbox reads from.</p>
   </div>
 
   <div id="priceListWrap" style="margin-bottom:36px;">Loading prices&hellip;</div>
@@ -123,7 +123,13 @@
     });
   });
 </script>
-<script src="client-widget.js"></script>
-<script>initPageAgent('Hora', "Hora confirms bookings, chases deposits, and releases dead holds once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+<script src="../admin/widget.js"></script>
+<script>
+  initAgentWidget({
+    agentName: 'Hora',
+    endpoint: 'http://127.0.0.1:8790/chat',
+    enabled: true
+  });
+</script>
 </body>
 </html>

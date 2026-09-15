@@ -1,10 +1,11 @@
 /* ============================================================
-   Where each page's agent will eventually live. Every agent here
-   is "coming soon" — none of Echo/Hora/Argo/Obol/Charis have a
-   backend yet (only Eos does, and Eos is the owner-only agent on
-   the admin side, not customer-facing) — so this just marks the
-   spot and names which agent owns this page, matching DOVA's
-   confirmed one-agent-per-page site model.
+   Where each page's agent will eventually live. Agents still
+   marked here are "coming soon" — Argo and Obol have no backend
+   yet. Eos, Charis, Echo and Hora are real, but Eos and Charis
+   are owner-only, admin-side agents (see admin/widget.js), not
+   customer-facing — so this just marks the spot and names which
+   agent owns this page, matching DOVA's confirmed one-agent-per-
+   page site model.
    ============================================================ */
 function initPageAgent(agentName, note) {
   var root = document.createElement('div');
