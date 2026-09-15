@@ -24,7 +24,7 @@
   <div class="agent-page-header">
     <h1 class="agent-page-name">Argo</h1>
     <span class="agent-page-role">Smart Inventory &amp; Supplier Outreach</span>
-    <p class="agent-page-note">Watches every count against its reorder point, drafts purchase orders, compares supplier prices. No backend built yet, so the chat below is a placeholder; the stock levels themselves are real sandbox data.</p>
+    <p class="agent-page-note">Watches every count against its reorder point and drafts purchase orders for you to approve &mdash; it never places an order itself. Ask it what needs reordering in the chat in the corner. Supplier price comparison isn't built yet: today's inventory data only tracks one supplier and one cost per item, so there's nothing real to compare against.</p>
   </div>
 
   <div class="data-section">
@@ -64,7 +64,11 @@
 </script>
 <script src="widget.js"></script>
 <script>
-  initAgentWidget({ agentName: 'Argo', endpoint: '', enabled: false });
+  initAgentWidget({
+    agentName: 'Argo',
+    endpoint: 'http://127.0.0.1:8792/chat',
+    enabled: true
+  });
 </script>
 </body>
 </html>

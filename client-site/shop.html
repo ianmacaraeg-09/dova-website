@@ -27,7 +27,7 @@
 <main class="site-main">
   <div class="page-head">
     <h1>What's in stock</h1>
-    <p>Live from our own inventory &mdash; the same records Argo watches for reorder points. This is read-only: a real storefront wouldn't let visitors edit stock, just see it.</p>
+    <p>Live from our own inventory &mdash; the same records Argo watches for reorder points. This is read-only: a real storefront wouldn't let visitors edit stock, just see it. Argo itself is a staff-side specialist, not a chat you'll find here &mdash; there's no customer action for it to take on a shop shelf.</p>
   </div>
 
   <div id="catalogWrap">Loading&hellip;</div>
@@ -50,7 +50,5 @@
     document.getElementById('catalogWrap').textContent = 'Could not load the catalog: ' + err.message;
   });
 </script>
-<script src="client-widget.js"></script>
-<script>initPageAgent('Argo', "Argo watches stock levels and handles supplier reordering once it's wired up. Not connected yet.");</script>
 </body>
 </html>

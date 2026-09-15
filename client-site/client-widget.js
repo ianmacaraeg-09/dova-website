@@ -1,13 +1,13 @@
 /* ============================================================
-   Where each page's agent will eventually live. Agents still
-   marked here are "coming soon" — only Argo has no backend yet.
-   Eos, Charis, Echo, Hora and Obol are all real (see
-   admin/widget.js), though Eos and Charis are owner-only,
-   admin-side agents with no public trace at all, while Obol is
-   genuinely both — a real public presence here plus a separate
+   Where each page's agent will eventually live. All six agents
+   are real now (see admin/widget.js) — Eos, Charis and Argo are
+   owner-only, admin-side agents with no public trace at all;
+   Echo and Hora are straightforwardly customer-facing; Obol is
+   genuinely both, a real public presence plus a separate
    admin-side view for the collections/ageing side of its job.
-   This file just marks the spot and names which agent owns each
-   page, matching DOVA's confirmed one-agent-per-page site model.
+   The one remaining caller of initPageAgent (index.html's
+   homepage bubble) is a real "coming soon": a site-wide Echo
+   presence distinct from Echo's real per-page widget on Contact.
    ============================================================ */
 function initPageAgent(agentName, note) {
   var root = document.createElement('div');
