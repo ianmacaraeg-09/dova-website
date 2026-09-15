@@ -164,6 +164,36 @@ button,input{ font-family:var(--font-body); color:inherit; }
 .agent-widget-msg.typing span:nth-child(3){ animation-delay:.3s; }
 @keyframes agent-typing{ 0%,60%,100%{ opacity:.3; transform:translateY(0); } 30%{ opacity:1; transform:translateY(-2px); } }
 
+/* ---------- animated blob avatar (Eos only, for now) ---------- */
+.agent-widget-bubble.has-blob{ background:transparent; box-shadow:none; overflow:visible; }
+.agent-avatar-blob{
+  --blob-gradient: conic-gradient(from 200deg at 50% 50%, #ffb347, #ff6fae, #b06be0, #4ea8de, #ffb347);
+  width:100%; height:100%; border-radius:58% 42% 61% 39% / 46% 55% 45% 54%;
+  background:var(--blob-gradient); filter:blur(1px) saturate(1.15);
+  box-shadow:0 0 24px -4px rgba(255,111,174,.55);
+  animation:blob-morph 9s ease-in-out infinite, blob-pulse 6.5s ease-in-out infinite;
+  transition:filter .3s;
+}
+.agent-avatar-blob.talking{ animation-duration:1.7s, 1.1s; box-shadow:0 0 32px -2px rgba(255,111,174,.75); }
+.agent-widget-bubble .agent-avatar-blob{ position:absolute; inset:0; }
+.agent-widget-avatar-stage{
+  flex:1 0 96px; min-height:96px; display:flex; align-items:center; justify-content:center; padding:8px 0;
+}
+.agent-widget-avatar-stage .agent-avatar-blob{ width:118px; height:118px; }
+@keyframes blob-morph{
+  0%,100%{ border-radius:58% 42% 61% 39% / 46% 55% 45% 54%; transform:rotate(0deg); }
+  25%{ border-radius:45% 55% 40% 60% / 60% 45% 55% 40%; transform:rotate(4deg); }
+  50%{ border-radius:65% 35% 55% 45% / 40% 60% 40% 60%; transform:rotate(-3deg); }
+  75%{ border-radius:40% 60% 65% 35% / 55% 40% 60% 45%; transform:rotate(2deg); }
+}
+@keyframes blob-pulse{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.06); }
+}
+@media (prefers-reduced-motion:reduce){
+  .agent-avatar-blob{ animation:none; }
+}
+
 .agent-widget-form{ display:flex; gap:8px; padding:12px; border-top:1px solid var(--line); }
 .agent-widget-input{
   flex:1; background:transparent; border:1px solid var(--line-strong); border-radius:20px;
