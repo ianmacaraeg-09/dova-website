@@ -17,6 +17,7 @@ function initAgentWidget(config) {
   var agentName = config.agentName;
   var endpoint = config.endpoint;
   var enabled = !!config.enabled;
+  var surface = config.surface;
   var sessionKey = 'dova_' + agentName.toLowerCase() + '_session_id';
 
   var root = document.createElement('div');
@@ -114,10 +115,12 @@ function initAgentWidget(config) {
     var typing = addMessage('assistant typing', '<span></span><span></span><span></span>');
 
     try {
+      var payload = { message: text, session_id: sessionId };
+      if (surface) payload.surface = surface;
       var res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, session_id: sessionId })
+        body: JSON.stringify(payload)
       });
       var data = await res.json();
       typing.remove();

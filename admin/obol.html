@@ -24,7 +24,7 @@
   <div class="agent-page-header">
     <h1 class="agent-page-name">Obol</h1>
     <span class="agent-page-role">Payments &amp; Collections</span>
-    <p class="agent-page-note">Chases unpaid deposits, invoices and balances, and stops the moment they settle. No backend built yet, so the chat below is a placeholder; the invoices themselves are real sandbox data.</p>
+    <p class="agent-page-note">Chases unpaid deposits, invoices and balances on your schedule, in your tone, and stops the moment they settle. Ask it who's overdue in the chat in the corner &mdash; it has the full ageing picture here, unlike the checkout page's copy which only ever logs a refund request.</p>
   </div>
 
   <div class="data-section">
@@ -63,7 +63,12 @@
 </script>
 <script src="widget.js"></script>
 <script>
-  initAgentWidget({ agentName: 'Obol', endpoint: '', enabled: false });
+  initAgentWidget({
+    agentName: 'Obol',
+    endpoint: 'http://127.0.0.1:8791/chat',
+    enabled: true,
+    surface: 'admin'
+  });
 </script>
 </body>
 </html>

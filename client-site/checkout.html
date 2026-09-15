@@ -27,7 +27,7 @@
 <main class="site-main">
   <div class="page-head">
     <h1>Checkout</h1>
-    <p>Settle a balance for a session or a shop item. No real payment happens here &mdash; this creates a real invoice record for Obol to eventually chase or reconcile.</p>
+    <p>Settle a balance for a session or a shop item. No real payment happens here &mdash; this creates a real invoice record for Obol to eventually chase or reconcile. Need a refund instead? Obol's live in the corner &mdash; it'll log your request and point you to the team, it just can't approve anything itself.</p>
   </div>
 
   <form class="form-card" id="checkoutForm">
@@ -83,7 +83,14 @@
     });
   });
 </script>
-<script src="client-widget.js"></script>
-<script>initPageAgent('Obol', "Obol chases unpaid balances and stops the moment they settle, once it's wired up. Not connected yet — this form writes directly to Supabase.");</script>
+<script src="../admin/widget.js"></script>
+<script>
+  initAgentWidget({
+    agentName: 'Obol',
+    endpoint: 'http://127.0.0.1:8791/chat',
+    enabled: true,
+    surface: 'checkout'
+  });
+</script>
 </body>
 </html>
