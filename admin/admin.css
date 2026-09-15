@@ -112,6 +112,8 @@ button,input{ font-family:var(--font-body); color:inherit; }
 .pill-ok{ color:#4ade80; border-color:rgba(74,222,128,.35); }
 .pill-warn{ color:#e0b34d; border-color:rgba(224,179,77,.4); }
 .pill-danger{ color:#e0776b; border-color:rgba(224,119,107,.4); }
+.pill-scoped{ color:#7dd3fc; border-color:rgba(125,211,252,.4); }
+.agent-tile-facing{ margin:4px 0 10px; }
 
 /* ---------- individual agent page ---------- */
 .agent-page-header{ text-align:center; padding:min(14vh,110px) 20px 40px; }
