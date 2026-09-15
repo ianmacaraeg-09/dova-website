@@ -24,7 +24,7 @@
   <div class="agent-page-header">
     <h1 class="agent-page-name">Echo</h1>
     <span class="agent-page-role">24/7 Helpdesk</span>
-    <p class="agent-page-note">Answers every enquiry that lands — web, Messenger, SMS — in your voice and your prices. No backend built yet, so the chat below is a placeholder; the enquiries themselves are real sandbox data.</p>
+    <p class="agent-page-note">Answers every enquiry that lands &mdash; web, Messenger, SMS &mdash; in your voice and your prices. Same assistant as the public Contact page widget; ask it anything from here too.</p>
   </div>
 
   <div class="data-section">
@@ -64,7 +64,11 @@
 </script>
 <script src="widget.js"></script>
 <script>
-  initAgentWidget({ agentName: 'Echo', endpoint: '', enabled: false });
+  initAgentWidget({
+    agentName: 'Echo',
+    endpoint: 'http://127.0.0.1:8788/chat',
+    enabled: true
+  });
 </script>
 </body>
 </html>

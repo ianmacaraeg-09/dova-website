@@ -24,7 +24,7 @@
   <div class="agent-page-header">
     <h1 class="agent-page-name">Hora</h1>
     <span class="agent-page-role">Bookings &amp; Scheduling</span>
-    <p class="agent-page-note">Holds the calendar, confirms and reschedules, chases deposits. No backend built yet, so the chat below is a placeholder; the bookings themselves are real sandbox data.</p>
+    <p class="agent-page-note">Holds the calendar, confirms and reschedules, chases deposits, and releases dead holds. Ask it about overdue deposits or stale holds in the chat in the corner &mdash; it has staff-level access here that the public Booking page widget never gets.</p>
   </div>
 
   <div class="data-section">
@@ -65,7 +65,16 @@
 </script>
 <script src="widget.js"></script>
 <script>
-  initAgentWidget({ agentName: 'Hora', endpoint: '', enabled: false });
+  initAgentWidget({
+    agentName: 'Hora',
+    endpoint: 'http://127.0.0.1:8790/chat',
+    enabled: true,
+    surface: 'admin',
+    getAccessToken: function () {
+      var s = loadSession();
+      return s && s.access_token;
+    }
+  });
 </script>
 </body>
 </html>

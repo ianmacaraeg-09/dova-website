@@ -18,6 +18,7 @@ function initAgentWidget(config) {
   var endpoint = config.endpoint;
   var enabled = !!config.enabled;
   var surface = config.surface;
+  var getAccessToken = config.getAccessToken;
   var sessionKey = 'dova_' + agentName.toLowerCase() + '_session_id';
 
   var root = document.createElement('div');
@@ -117,6 +118,10 @@ function initAgentWidget(config) {
     try {
       var payload = { message: text, session_id: sessionId };
       if (surface) payload.surface = surface;
+      if (getAccessToken) {
+        var token = getAccessToken();
+        if (token) payload.access_token = token;
+      }
       var res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
