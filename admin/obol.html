@@ -68,6 +68,9 @@
     endpoint: 'http://127.0.0.1:8791/chat',
     enabled: true,
     surface: 'admin',
+    avatar: 'blob',
+    blobPalette: ['#f2ddb8', '#e8c896', '#dbb179', '#c99760', '#b07f4a'],
+    tts: true,
     getAccessToken: function () {
       var s = loadSession();
       return s && s.access_token;
